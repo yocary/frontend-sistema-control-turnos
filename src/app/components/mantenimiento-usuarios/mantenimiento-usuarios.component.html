@@ -1,0 +1,139 @@
+<div class="user-maintenance-container">
+    <div class="title-bar">
+        <h2 *ngIf="!showAddEmployeeForm && !showSolicitudesList && !showConsultarUsuarioForm">Mantenimiento de Usuarios</h2>
+      </div>
+
+      <div *ngIf="!showAddEmployeeForm && !showSolicitudesList && !showConsultarUsuarioForm" class="options">
+        <button mat-raised-button color="primary" (click)="showAddEmployeeForm = true">
+          Agregar Empleado
+        </button>
+        <button mat-raised-button color="primary" (click)="showConsultarUsuarioForm = true">
+            Consultar Usuario
+        </button>
+        <button mat-raised-button color="primary" (click)="showSolicitudesList = true">
+          Solicitudes
+        </button>
+        <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
+      </div>
+  
+    <div *ngIf="showAddEmployeeForm" class="form-container">
+      <h2>AGREGAR EMPLEADOS</h2>
+      <form (ngSubmit)="onAddEmployee()">
+        <mat-form-field>
+            <mat-label>No. DPI</mat-label>
+            <input matInput [(ngModel)]="employee.dpi" name="dpi" required>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput [(ngModel)]="employee.fullName" name="fullName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <input matInput [(ngModel)]="employee.usuario" name="fullName" required>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Área</mat-label>
+          <input matInput [(ngModel)]="employee.area" name="area" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Turno</mat-label>
+          <mat-select [(ngModel)]="employee.shift" name="shift" required>
+            <mat-option value="morning">Turno Matutino</mat-option>
+            <mat-option value="afternoon">Turno Vespertino</mat-option>
+            <mat-option value="night">Turno Diurno</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="employee.status" name="status" required>
+            <mat-option value="active">Activo</mat-option>
+            <mat-option value="inactive">Inactivo</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-buttons">
+          <button mat-raised-button color="accent" type="button" (click)="onSaveEmployee()">Guardar</button>
+          <button mat-raised-button color="warn" type="button" (click)="onBack()">Regresar</button>
+        </div>
+      </form>
+    </div>
+  
+    <div *ngIf="showSolicitudesList" class="table-container">
+      <h2>SOLICITUDES LICENCIAS Y VACACIONES</h2>
+      <table mat-table [dataSource]="solicitudes" class="mat-elevation-z8 custom-table">
+        <ng-container matColumnDef="tipoSolicitud">
+          <th mat-header-cell *matHeaderCellDef> Tipo de Solicitud </th>
+          <td mat-cell *matCellDef="let solicitud"> {{solicitud.tipoSolicitud}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="adminAprobo">
+          <th mat-header-cell *matHeaderCellDef> Admin Aprobó </th>
+          <td mat-cell *matCellDef="let solicitud"> {{solicitud.adminAprobo}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="usuario">
+          <th mat-header-cell *matHeaderCellDef> Usuario </th>
+          <td mat-cell *matCellDef="let solicitud"> {{solicitud.usuario}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let solicitud"> {{solicitud.fecha}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="justificacion">
+          <th mat-header-cell *matHeaderCellDef> Justificación </th>
+          <td mat-cell *matCellDef="let solicitud"> {{solicitud.justificacion}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="opciones">
+          <th mat-header-cell *matHeaderCellDef> Opciones </th>
+          <td mat-cell *matCellDef="let solicitud">
+            <button mat-button (click)="aprobarSolicitud(solicitud)">Aprobar</button>
+            <button mat-button (click)="rechazarSolicitud(solicitud)">Rechazar</button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <button mat-raised-button color="warn" (click)="onBack()">Regresar</button>
+    </div>
+
+    <div *ngIf="showConsultarUsuarioForm">
+        <h2>CONSULTAR USUARIO</h2>
+        <div class="search-container">
+            <mat-form-field>
+              <mat-label>*Filtro de búsqueda*</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por usuario">
+            </mat-form-field>
+          </div>
+          <table mat-table [dataSource]="filteredUsuarios" class="mat-elevation-z8 custom-table">
+            <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Usuario </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.usuario}} </td>
+          </ng-container>
+      
+          
+          <ng-container matColumnDef="turno">
+            <th mat-header-cell *matHeaderCellDef> Turno </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.turno}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="area">
+            <th mat-header-cell *matHeaderCellDef> Área </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.area}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.estado}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedUserColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedUserColumns;"></tr>
+        </table>
+        <button mat-raised-button color="warn" (click)="onBack()">Regresar</button>
+      </div>
+
+  </div>
+  

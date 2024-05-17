@@ -1,0 +1,12 @@
+{
+  "name": "Control de Turnos",
+  "short_name": "Control de Turnos",
+  "theme_color": "#2b317f",
+  "background_color": "#2b317f",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    
+  ]
+}
