@@ -29,7 +29,7 @@ export class MantenimientoUsuariosComponent {
 
   usuarios = [
     { usuario: 'Usuario1', turno: 'Turno Vespertino', area: 'Ventas', estado: 'Activo' },
-    { usuario: 'Usuario2', turno: 'Turno Diruno', area: 'Informática', estado: 'Inactivo' },
+    { usuario: 'Usuario2', turno: 'Turno Diurno', area: 'Informática', estado: 'Inactivo' },
   ];
 
   displayedColumns: string[] = ['tipoSolicitud', 'adminAprobo', 'usuario', 'fecha', 'justificacion', 'opciones'];
@@ -65,6 +65,7 @@ export class MantenimientoUsuariosComponent {
       if (result.isConfirmed) {
         this.showAddEmployeeForm = false;
         this.showSolicitudesList = false;
+        this.showConsultarUsuarioForm = false;
         Swal.fire(
           'Guardado',
           'El empleado ha sido guardado.',
