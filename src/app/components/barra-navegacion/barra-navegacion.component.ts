@@ -11,10 +11,14 @@ export class BarraNavegacionComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   shouldShowLogout(): boolean {
+    const excludedRoutes = ['/login'];
+    return !excludedRoutes.includes(this.router.url);
+  }
+
+  shouldShowOptions(): boolean {
     const excludedRoutes = ['/login'];
     return !excludedRoutes.includes(this.router.url);
   }
