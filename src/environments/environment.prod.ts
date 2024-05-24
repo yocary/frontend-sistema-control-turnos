@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  api: "http://localhost:18080",
+  api: "https://backend-sistema-control-turnos--production-yocary.sierranegra.cloud",
 };
 
 /*
