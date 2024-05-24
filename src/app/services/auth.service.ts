@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 export class AuthService {
 
 
-  private baseUrl = 'http://localhost:8080'; // Ajusta la URL base según tu backend
+  private baseUrl = environment.api; // Ajusta la URL base según tu backend
 
   constructor(private http: HttpClient, private router: Router) { }
 

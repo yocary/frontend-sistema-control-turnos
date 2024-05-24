@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AsignacionTurnos } from '../models/asignacion-turnos.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpleadoService {
 
-  private baseUrl = 'http://localhost:8080'; // Ajusta la URL base según tu backend
+  private baseUrl = environment.api; // Ajusta la URL base según tu backend
 
   constructor(private http: HttpClient) { }
 
