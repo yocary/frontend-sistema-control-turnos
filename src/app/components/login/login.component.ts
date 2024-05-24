@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -12,57 +10,34 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  username: string = '';
+  password: string = '';
 
-  hide = true;
-  loginForm: FormGroup;
-  redirect: string | null = null;
-  // username!: string;
-  // password!: string;
-  formCarga!: FormGroup;
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private authService: AuthService, private router: Router) { }
 
-
-    this.buildForm();
-
-    localStorage.setItem('section', 'login');
-    this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
-      pass: new FormControl(null, Validators.required)
-    });
-  }
-
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      if (params.has("redirect")) {
-        this.redirect = params.get("redirect");
-      }
-    })
-  }
-
-  private buildForm() {
-    this.formCarga = this.formBuilder.group({
-      username: [
-        '',
-        [
-          Validators.required
-        ],
-      ],
-      password: ['', [Validators.required]],
-
-
-    });
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/inicio']);
     }
-
-  login(){
-
-    
   }
 
-  
+  login(): void {
+    this.authService.authenticate(this.username, this.password)
+      .subscribe(
+        response => {
+          // Maneja la respuesta exitosa
+          localStorage.setItem('token', response.jwt);
+          this.router.navigate(['/inicio']);
+        },
+        error => {
+          // Muestra un mensaje de error utilizando Swal.fire
+          Swal.fire({
+            icon: 'error',
+            title: 'Credenciales incorrectas',
+          });
+          console.error('Error during login:', error);
+        }
+      );
+  }
+
 }

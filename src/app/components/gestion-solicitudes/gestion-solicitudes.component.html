@@ -1,0 +1,101 @@
+<div class="user-maintenance-container">
+    <div class="title-bar">
+        <h2 *ngIf="!showSolicitudesList && !showSolicitudesTurno">GESTIÓN DE SOLICITUDES</h2>
+      </div>
+
+      <div *ngIf="!showSolicitudesList && !showSolicitudesTurno" class="options">
+        <button mat-raised-button color="primary" (click)="showSolicitudesTurno = true">
+            Solicitudes Cambio de Turno
+        </button>
+        <button mat-raised-button color="primary" (click)="showSolicitudesList = true">
+          Solicitudes Licencias/Vacaciones
+        </button>
+        <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
+      </div>
+
+      <div *ngIf="showSolicitudesTurno" class="table-container">
+        <h2>SOLICITUDES DE CAMBIO DE TURNO</h2>
+        <table mat-table [dataSource]="solicitudesTurnos" class="mat-elevation-z8 custom-table">
+            <ng-container matColumnDef="turnoActual">
+              <th mat-header-cell *matHeaderCellDef> Turno actual </th>
+              <td mat-cell *matCellDef="let solicitudTurno"> {{solicitudTurno.turnoActual}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="turnoCambiar">
+              <th mat-header-cell *matHeaderCellDef> Admin Aprobó </th>
+              <td mat-cell *matCellDef="let solicitudTurno"> {{solicitudTurno.turnoCambiar}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="usuario">
+              <th mat-header-cell *matHeaderCellDef> Usuario </th>
+              <td mat-cell *matCellDef="let solicitudTurno"> {{solicitudTurno.usuario}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef> Fecha </th>
+              <td mat-cell *matCellDef="let solicitudTurno"> {{solicitudTurno.fecha}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="justificacion">
+              <th mat-header-cell *matHeaderCellDef> Justificación </th>
+              <td mat-cell *matCellDef="let solicitudTurno"> {{solicitudTurno.justificacion}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="opciones">
+              <th mat-header-cell *matHeaderCellDef> Opciones </th>
+              <td mat-cell *matCellDef="let solicitudTurno">
+                <button mat-button (click)="aprobarSolicitud(solicitudTurno)">Aprobar</button>
+                <button mat-button (click)="rechazarSolicitud(solicitudTurno)">Rechazar</button>
+              </td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsTurnos"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsTurnos;"></tr>
+          </table>
+        <button mat-raised-button color="warn" (click)="regresarGestiones()">Regresar</button>
+      </div>
+
+        <div *ngIf="showSolicitudesList" class="table-container">
+            <h2>SOLICITUDES LICENCIAS Y VACACIONES</h2>
+            <table mat-table [dataSource]="solicitudes" class="mat-elevation-z8 custom-table">
+                <ng-container matColumnDef="tipoSolicitud">
+                  <th mat-header-cell *matHeaderCellDef> Tipo de Solicitud </th>
+                  <td mat-cell *matCellDef="let solicitud"> {{solicitud.tipoSolicitud}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="adminAprobo">
+                  <th mat-header-cell *matHeaderCellDef> Admin Aprobó </th>
+                  <td mat-cell *matCellDef="let solicitud"> {{solicitud.adminAprobo}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="usuario">
+                  <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                  <td mat-cell *matCellDef="let solicitud"> {{solicitud.usuario}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="fecha">
+                  <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                  <td mat-cell *matCellDef="let solicitud"> {{solicitud.fecha}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="justificacion">
+                  <th mat-header-cell *matHeaderCellDef> Justificación </th>
+                  <td mat-cell *matCellDef="let solicitud"> {{solicitud.justificacion}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="opciones">
+                  <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                  <td mat-cell *matCellDef="let solicitud">
+                    <button mat-button (click)="aprobarSolicitud(solicitud)">Aprobar</button>
+                    <button mat-button (click)="rechazarSolicitud(solicitud)">Rechazar</button>
+                  </td>
+                </ng-container>
+          
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <button mat-raised-button color="warn" (click)="regresarGestiones()">Regresar</button>
+        </div>
+
+  </div>
+  

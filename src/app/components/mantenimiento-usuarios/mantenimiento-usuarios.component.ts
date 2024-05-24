@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,7 +10,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./mantenimiento-usuarios.component.scss']
 })
 export class MantenimientoUsuariosComponent {
-  showAddEmployeeForm: boolean = false;
+
+  empleados: any[] = [];
+  displayedUserColumns: string[] = ['nombre', 'area', 'estado'];
+  filteredEmpleados: any[] = [];
+
+  dataSource!: MatTableDataSource<any>;
+
   showSolicitudesList: boolean = false;
   showConsultarUsuarioForm: boolean = false;
 
@@ -29,14 +36,14 @@ export class MantenimientoUsuariosComponent {
 
   usuarios = [
     { usuario: 'Usuario1', turno: 'Turno Vespertino', area: 'Ventas', estado: 'Activo' },
-    { usuario: 'Usuario2', turno: 'Turno Diruno', area: 'Informática', estado: 'Inactivo' },
+    { usuario: 'Usuario2', turno: 'Turno Diurno', area: 'Informática', estado: 'Inactivo' },
   ];
 
   displayedColumns: string[] = ['tipoSolicitud', 'adminAprobo', 'usuario', 'fecha', 'justificacion', 'opciones'];
-  displayedUserColumns: string[] = ['nombre', 'turno', 'area', 'estado'];
+  
   filteredUsuarios = new MatTableDataSource(this.usuarios);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private empleadoService: EmpleadoService) {
     this.filteredUsuarios.filterPredicate = (data, filter: string) => {
       return data.usuario.toLowerCase().includes(filter) || 
              data.turno.toLowerCase().includes(filter) ||
@@ -44,10 +51,14 @@ export class MantenimientoUsuariosComponent {
              data.estado.toLowerCase().includes(filter);
     };
   }
+
+  ngOnInit(): void {
+    this.obtenerEmpleados();
+  }
+
   onAddEmployee() {
     if (this.employee.fullName && this.employee.dpi && this.employee.area) {
       this.resetForm();
-      this.showAddEmployeeForm = false; 
     } else {
     }
   }
@@ -63,8 +74,8 @@ export class MantenimientoUsuariosComponent {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.showAddEmployeeForm = false;
         this.showSolicitudesList = false;
+        this.showConsultarUsuarioForm = false;
         Swal.fire(
           'Guardado',
           'El empleado ha sido guardado.',
@@ -76,7 +87,6 @@ export class MantenimientoUsuariosComponent {
   }
 
   onBack() {
-    this.showAddEmployeeForm = false;
     this.showSolicitudesList = false;
     this.showConsultarUsuarioForm = false;
   }
@@ -108,8 +118,31 @@ export class MantenimientoUsuariosComponent {
     
   }
 
+
+
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.filteredUsuarios.filter = filterValue;
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  
+
+  obtenerEmpleados() {
+    this.empleadoService.obtenerEmpleados().subscribe(
+      data => {
+        this.empleados = data;
+        this.dataSource = new MatTableDataSource(this.empleados);
+      },
+      error => {
+        console.error('Error al obtener los empleados:', error);
+      }
+    );
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/registrar-empleado']);
   }
 }

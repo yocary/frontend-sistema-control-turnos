@@ -1,0 +1,45 @@
+<div class="register-container">
+    <h2>AGREGAR EMPLEADO</h2>
+    <form (ngSubmit)="register()">
+      <mat-form-field>
+        <mat-label>No. DPI</mat-label>
+        <input matInput type="text" id="dpi" name="dpi" [(ngModel)]="dpi" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput type="text" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Área</mat-label>
+        <input matInput type="text" id="area" name="area" [(ngModel)]="area" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Turno</mat-label>
+        <mat-select [(ngModel)]="turno" name="shift" required>
+          <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+          <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+          <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select [(ngModel)]="estado" name="status" required>
+          <mat-option value="Activo">Activo</mat-option>
+          <mat-option value="Inactivo">Inactivo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" id="contrasenia" name="contrasenia" [(ngModel)]="contrasenia" required>
+      </mat-form-field>
+      <div class="form-buttons">
+        <button mat-raised-button color="primary" type="submit">Registrar</button>
+        <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,70 @@
+.user-maintenance-container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  mat-form-field {
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  h2, h3 {
+    margin-top: 0;
+  }
+  
+  button {
+    margin: 10px;
+    font-size: 16px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .form-container {
+    margin-top: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .user-maintenance-container {
+      width: 60%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .user-maintenance-container {
+      width: 50%;
+    }
+  }
+  
+  .mat-table th.mat-header-cell {
+    background-color: blue;
+    color: white;
+    text-align: center; 
+    padding: 10px;
+  }
+  
+  .mat-table td.mat-cell {
+    text-align: center;
+    padding: 10px; 
+    border-bottom: 1px solid #ccc; 
+  }
+  
+  
+  

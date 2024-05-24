@@ -1,0 +1,33 @@
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px; /* Ajusta la altura según sea necesario */
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+}
+
+.title img.logo {
+  height: 90px; /* Ajusta el tamaño de la imagen según sea necesario */
+  width: auto;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.options-container {
+  display: flex;
+  gap: 16px;
+}
+
+.option-button {
+  font-size: 16px; /* Ajusta el tamaño de fuente de los botones de opción */
+}
+
+.logout-button {
+  margin-right: 24px; /* Ajusta el margen derecho del botón de cerrar sesión */
+}

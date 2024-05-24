@@ -1,0 +1,38 @@
+<div class="user-maintenance-container">
+    <h2>CAMBIO DE TURNO</h2>
+
+    <form (ngSubmit)="register()">
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha Inicial</mat-label>
+          <input matInput [matDatepicker]="fechaInicialPicker" [(ngModel)]="fechaInicial" name="fechaInicial" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaInicialPicker"></mat-datepicker-toggle>
+          <mat-datepicker #fechaInicialPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Turno Inicial</mat-label>
+            <input matInput type="text" id="turnoInicial" name="turnoInicial" [(ngModel)]="turnoIncial" required>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha Nueva</mat-label>
+          <input matInput [matDatepicker]="fechaNuevaPicker" [(ngModel)]="fechaNueva" name="fechaNueva" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaNuevaPicker"></mat-datepicker-toggle>
+          <mat-datepicker #fechaNuevaPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Turno Nuevo</mat-label>
+            <input matInput type="text" id="turnoNuevo" name="turnoNuevo" [(ngModel)]="turnoNuevo" required>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Justificación</mat-label>
+          <textarea matInput id="justificacion" name="justificacion" [(ngModel)]="justificacion" required></textarea>
+        </mat-form-field>
+      </form>
+
+    <button mat-raised-button color="primary">Guardar</button>
+    <button mat-raised-button color="accent">Limpiar</button>
+    <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
+</div>

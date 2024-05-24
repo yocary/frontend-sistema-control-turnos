@@ -1,0 +1,21 @@
+<!-- src/app/nav-bar/nav-bar.component.html -->
+<mat-toolbar color="primary" class="toolbar-container">
+  <div class="title-container">
+      <a routerLink="/inicio" class="title">
+          <img src="./assets/img/logo-barra.png" alt="Logo" class="logo">
+      </a>
+  </div>
+    <div class="options-container">
+      <button mat-button color="accent" class="option-button" (click)="matenimientoUsuarios()">Mantenimiento de usuarios</button>
+      <button mat-button color="accent" class="option-button" (click)="asignacionTurnos()">Asignación de turnos</button>
+      <button mat-button color="accent" class="option-button" (click)="gestionRrhh()">Gestión de RRHH</button>
+      <button mat-button color="accent" class="option-button" (click)="gestionSolicitudes()">Gestión de solicitudes</button>
+      <button mat-button color="accent" class="option-button" (click)="gestionesEmpleado()">Gestión del empleado</button>
+      <button mat-button color="accent" class="option-button" (click)="cambioTurno()">Cambios de turno</button>
+    </div>
+    
+    <button mat-icon-button *ngIf="shouldShowLogout()" class="logout-button" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+  
