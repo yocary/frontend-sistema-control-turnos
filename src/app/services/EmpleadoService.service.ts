@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EmpleadoService {
 
-  private baseUrl = environment.api; // Ajusta la URL base según tu backend
+  private baseUrl = environment.api; // se consume la ruta que se declaro en el environment
 
   constructor(private http: HttpClient) { }
 

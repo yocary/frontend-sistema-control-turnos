@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  api: "https://backend-sistema-control-turnos--production-yocary.sierranegra.cloud",
+  api: "https://sistema-control-turnos-backend--production-yocary.sierranegra.cloud",
 };
 
 /*
