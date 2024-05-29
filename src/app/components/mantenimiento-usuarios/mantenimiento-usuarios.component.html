@@ -19,43 +19,43 @@
   
     <div *ngIf="showSolicitudesList" class="table-container">
       <h2>SOLICITUDES LICENCIAS Y VACACIONES</h2>
-      <table mat-table [dataSource]="solicitudes" class="mat-elevation-z8 custom-table">
-        <ng-container matColumnDef="tipoSolicitud">
-          <th mat-header-cell *matHeaderCellDef> Tipo de Solicitud </th>
-          <td mat-cell *matCellDef="let solicitud"> {{solicitud.tipoSolicitud}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="adminAprobo">
-          <th mat-header-cell *matHeaderCellDef> Admin Aprobó </th>
-          <td mat-cell *matCellDef="let solicitud"> {{solicitud.adminAprobo}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="usuario">
-          <th mat-header-cell *matHeaderCellDef> Usuario </th>
-          <td mat-cell *matCellDef="let solicitud"> {{solicitud.usuario}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef> Fecha </th>
-          <td mat-cell *matCellDef="let solicitud"> {{solicitud.fecha}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="justificacion">
-          <th mat-header-cell *matHeaderCellDef> Justificación </th>
-          <td mat-cell *matCellDef="let solicitud"> {{solicitud.justificacion}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="opciones">
-          <th mat-header-cell *matHeaderCellDef> Opciones </th>
-          <td mat-cell *matCellDef="let solicitud">
-            <button mat-button (click)="aprobarSolicitud(solicitud)">Aprobar</button>
-            <button mat-button (click)="rechazarSolicitud(solicitud)">Rechazar</button>
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <table mat-table [dataSource]="solicitudes" class="mat-elevation-z8 custom-table">
+          <ng-container matColumnDef="tipoSolicitud">
+            <th mat-header-cell *matHeaderCellDef> Tipo de Solicitud </th>
+            <td mat-cell *matCellDef="let solicitud"> {{solicitud.tipoSol}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="adminAprobo">
+            <th mat-header-cell *matHeaderCellDef> Admin Aprobó </th>
+            <td mat-cell *matCellDef="let solicitud"> {{solicitud.adminAprobo ? solicitud.adminAprobo : 'N/A'}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef> Usuario </th>
+            <td mat-cell *matCellDef="let solicitud"> {{solicitud.usuario}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let solicitud"> {{solicitud.fechaCreacion}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="justificacion">
+            <th mat-header-cell *matHeaderCellDef> Justificación </th>
+            <td mat-cell *matCellDef="let solicitud"> {{solicitud.justificacion}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="opciones">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let solicitud">
+              <button mat-button (click)="aprobarSolicitud(solicitud.idLicencia)">Aprobar</button>
+              <button mat-button (click)="rechazarSolicitud(solicitud.idLicencia)">Rechazar</button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       <button mat-raised-button color="warn" (click)="onBack()">Regresar</button>
     </div>
 

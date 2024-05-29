@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 
 @Component({
   selector: 'app-cambio-turno',
@@ -15,13 +16,32 @@ export class CambioTurnoComponent implements OnInit {
   turnoNuevo!: string
   justificacion!: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,  private empleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
   }
 
   register() {
+    const data = {
+      estado: 'PAT',
+      fechaSolicitud: new Date(),
+      fechaTurnoInicial: this.fechaInicial,
+      fechaTurnoNuevo: this.fechaNueva,
+      idSolicitud: 0,
+      justificacion: this.justificacion,
+      turnoInicial: this.turnoIncial,
+      turnoNuevo: this.turnoNuevo,
+      usuario: this.usuario
+    };
 
+    this.empleadoService.cambiarTurno(data).subscribe(
+      (response) => {
+        console.log('Respuesta del servidor:', response);
+      },
+      (error) => {
+        console.error('Error al enviar la solicitud:', error);
+      }
+    );
   }
 
   onBackToLogin() {

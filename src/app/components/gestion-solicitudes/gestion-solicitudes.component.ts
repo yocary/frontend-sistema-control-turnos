@@ -1,5 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
+
+interface Solicitud {
+  idLicencia: number;
+  tipoSol: string;
+  usuario: string;
+  justificacion: string;
+  fechaCreacion: string;
+}
+
+interface SolCambioTurno {
+  idSolicitud: number;
+  turnoAcutal: string;
+  turnoNuevo: string;
+  usuario: string;
+  fecha: string;
+  justificacion: string;
+}
 
 @Component({
   selector: 'app-gestion-solicitudes',
@@ -8,25 +26,29 @@ import { Router } from '@angular/router';
 })
 export class GestionSolicitudesComponent implements OnInit {
 
+  solicitudes: Solicitud[] = [];
+  solicitudesCambioTurno: SolCambioTurno[] = [];
+  displayedColumns: string[] = ['tipoSolicitud', 'adminAprobo', 'usuario', 'fecha', 'justificacion', 'opciones'];
+
+
   showSolicitudesList: boolean = false;
   showSolicitudesTurno: boolean = false;
 
-  solicitudes = [
-    { tipoSolicitud: 'Vacaciones', adminAprobo: 'Admin1', usuario: 'Usuario1', fecha: '01/04/2024', justificacion: 'Vacaciones', opciones: '' },
-    { tipoSolicitud: 'Licencia de cumpleaños', adminAprobo: 'Admin2', usuario: 'Usuario2', fecha: '15/05/2024', justificacion: 'Cumpleaños', opciones: '' },
-  ];
+
 
   solicitudesTurnos = [
     { turnoActual: 'Matutino', turnoCambiar: 'Vespertino', usuario: 'Usuario1', fecha: '01/04/2024', justificacion: 'Capacitación', opciones: '' },
     { turnoActual: 'Diurno', turnoCambiar: 'Matutino', usuario: 'Usuario2', fecha: '15/05/2024', justificacion: 'Salud', opciones: '' },
   ];
 
-  displayedColumns: string[] = ['tipoSolicitud', 'adminAprobo', 'usuario', 'fecha', 'justificacion', 'opciones'];
+
   displayedColumnsTurnos: string[] = ['turnoActual', 'turnoCambiar', 'usuario', 'fecha', 'justificacion', 'opciones'];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private empleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
+    this.obtenerSolicitud();
+    this.obtenerSolCambioTurno();
   }
 
   regresarGestiones() {
@@ -39,12 +61,59 @@ export class GestionSolicitudesComponent implements OnInit {
   }
 
   aprobarSolicitud(solicitud: any) {
-
+    const estadoSol = 'AAA';
+    this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
   }
 
   rechazarSolicitud(solicitud: any) {
-    
+    const estadoSol = 'RAA';
+    this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
   }
 
+  obtenerSolicitud() {
+    this.empleadoService.obtenerSolicitudes('PA').subscribe(data => {
+      this.solicitudes = data;
+    });
+  }
+
+  obtenerSolCambioTurno() {
+    this.empleadoService.obtenerSolCambioTurno('PAT').subscribe(data => {
+      this.solicitudesCambioTurno = data;
+    });
+  }
+
+  aprobarSolicitudTurno(solicitud: any) {
+    const estadoSol = 'TA';
+    this.empleadoService.actualizarEstadoTurno(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
+  }
+
+  rechazarSolicitudTurno(solicitud: any) {
+    const estadoSol = 'TR';
+    this.empleadoService.actualizarEstadoTurno(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
+  }
 
 }

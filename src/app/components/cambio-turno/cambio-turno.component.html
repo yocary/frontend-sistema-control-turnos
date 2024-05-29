@@ -13,8 +13,12 @@
           <mat-datepicker #fechaInicialPicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Turno Inicial</mat-label>
-            <input matInput type="text" id="turnoInicial" name="turnoInicial" [(ngModel)]="turnoIncial" required>
+          <mat-label>Turno Inicial</mat-label>
+            <mat-select [(ngModel)]="turnoIncial" name="shift" required>
+              <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+              <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+              <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+            </mat-select>
           </mat-form-field>
         <mat-form-field>
           <mat-label>Fecha Nueva</mat-label>
@@ -23,16 +27,23 @@
           <mat-datepicker #fechaNuevaPicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Turno Nuevo</mat-label>
-            <input matInput type="text" id="turnoNuevo" name="turnoNuevo" [(ngModel)]="turnoNuevo" required>
-          </mat-form-field>
+        <mat-label>Turno Nuevo</mat-label>
+          <mat-select [(ngModel)]="turnoNuevo" name="shift" required>
+            <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+            <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+            <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+          </mat-select>
+        </mat-form-field>
         <mat-form-field>
           <mat-label>Justificación</mat-label>
           <textarea matInput id="justificacion" name="justificacion" [(ngModel)]="justificacion" required></textarea>
         </mat-form-field>
-      </form>
+      
+        <!-- Botón de guardar dentro del formulario -->
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </form>
 
-    <button mat-raised-button color="primary">Guardar</button>
+    <!-- Los otros botones están fuera del formulario -->
     <button mat-raised-button color="accent">Limpiar</button>
     <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
 </div>

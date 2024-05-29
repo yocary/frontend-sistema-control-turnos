@@ -1,88 +1,38 @@
 <div class="user-maintenance-container">
-    <div class="title-bar">
-        <h2 *ngIf="!showGestionVacaciones && !showGestionesEmpleado">GESTIONES DEL EMPLEADO</h2>
-      </div>
-
-      <div *ngIf="!showGestionVacaciones && !showGestionesEmpleado" class="options">
-
-        <button mat-raised-button color="primary" (click)="showGestionesEmpleado = true">
-            Gestión de Vacaciones
-        </button>
-        <button mat-raised-button color="primary" (click)="showGestionVacaciones = true">
-          Gestiones del Empleado
-        </button>
-        <button mat-raised-button color="warn" (click)="regresar()">Regresar</button>
-      </div>
-
-      <div *ngIf="showGestionesEmpleado" class="table-container">
-        <h2>GESTIÓN DE VACACIONES</h2>
-        <form (ngSubmit)="register()">
-            <mat-form-field>
-              <mat-label>Usuario</mat-label>
-              <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Fecha Inicio</mat-label>
-              <input matInput [matDatepicker]="fechaInicioPicker" [(ngModel)]="fechaInicio" name="fechaInicio" required>
-              <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
-              <mat-datepicker #fechaInicioPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Fecha Fin</mat-label>
-              <input matInput [matDatepicker]="fechaFinPicker" [(ngModel)]="fechaFin" name="fechaFin" required>
-              <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
-              <mat-datepicker #fechaFinPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Motivo Solicitud</mat-label>
-              <textarea matInput id="motivoSolicitud" name="motivoSolicitud" [(ngModel)]="motivoSolicitud" required></textarea>
-            </mat-form-field>
-            <div class="form-buttons">
-              <button mat-raised-button color="primary" type="submit">Guardar</button>
-              <button mat-raised-button color="warn" type="button" (click)="regresarGestiones()">Regresar</button>
-            </div>
-          </form>
-      </div>
-
-
-
-      <div *ngIf="showGestionVacaciones" class="table-container">
-        <h2>GESTIONES DEL EMPLEADO</h2>
-        <form (ngSubmit)="register()">
-            <mat-form-field>
-              <mat-label>Usuario</mat-label>
-              <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Gestiones</mat-label>
-              <mat-select [(ngModel)]="gestion" name="gestion" required>
-                <mat-option *ngFor="let gestion of gestiones" [value]="gestion">{{gestion}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Fecha Inicio</mat-label>
-              <input matInput [matDatepicker]="fechaInicioPicker" [(ngModel)]="fechaInicio" name="fechaInicio" required>
-              <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
-              <mat-datepicker #fechaInicioPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Fecha Fin</mat-label>
-              <input matInput [matDatepicker]="fechaFinPicker" [(ngModel)]="fechaFin" name="fechaFin" required>
-              <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
-              <mat-datepicker #fechaFinPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Motivo Solicitud</mat-label>
-              <textarea matInput id="motivoSolicitud" name="motivoSolicitud" [(ngModel)]="motivoSolicitud" required></textarea>
-            </mat-form-field>
-            <div class="form-buttons">
-              <button mat-raised-button color="primary" type="submit">Guardar</button>
-              <button mat-raised-button color="warn" type="button" (click)="regresarGestiones()">Regresar</button>
-            </div>
-          </form>
-
-      </div>
-
-
+  <div class="title-bar">
+    <h2>GESTIONES DEL EMPLEADO</h2>
   </div>
-  
+
+  <form (ngSubmit)="register()">
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gestiones</mat-label>
+      <mat-select [(ngModel)]="gestion" name="gestion" required>
+        <mat-option *ngFor="let gestion of gestiones" [value]="gestion.valor">{{gestion.descripcion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="fechaInicioPicker" [(ngModel)]="fechaInicio" name="fechaInicio" required>
+      <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fechaInicioPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="fechaFinPicker" [(ngModel)]="fechaFin" name="fechaFin" required>
+      <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fechaFinPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Motivo Solicitud</mat-label>
+      <textarea matInput id="motivoSolicitud" name="motivoSolicitud" [(ngModel)]="motivoSolicitud" required></textarea>
+    </mat-form-field>
+    <div class="form-buttons">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
+    </div>
+  </form>
+</div>

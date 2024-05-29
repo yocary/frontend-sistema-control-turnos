@@ -25,6 +25,7 @@ import { GestionRrhhComponent } from './components/gestion-rrhh/gestion-rrhh.com
 import { GestionesEmpleadoComponent } from './components/gestiones-empleado/gestiones-empleado.component';
 import { GestionSolicitudesComponent } from './components/gestion-solicitudes/gestion-solicitudes.component';
 import { CambioTurnoComponent } from './components/cambio-turno/cambio-turno.component';
+import { JwtInterceptor } from './interceptors/JwtInterceptor.intercerptor';
 
 
 const MY_DATE_FORMATS = {
@@ -79,7 +80,7 @@ const MY_DATE_FORMATS = {
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

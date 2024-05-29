@@ -4,12 +4,22 @@ import { Router } from '@angular/router';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 import Swal from 'sweetalert2';
 
+interface Solicitud {
+  idLicencia: number;
+  tipoSol: string;
+  usuario: string;
+  justificacion: string;
+  fechaCreacion: string;
+}
+
 @Component({
   selector: 'app-mantenimiento-usuarios',
   templateUrl: './mantenimiento-usuarios.component.html',
   styleUrls: ['./mantenimiento-usuarios.component.scss']
 })
 export class MantenimientoUsuariosComponent {
+
+  solicitudes: Solicitud[] = [];
 
   empleados: any[] = [];
   displayedUserColumns: string[] = ['nombre', 'area', 'estado'];
@@ -29,10 +39,6 @@ export class MantenimientoUsuariosComponent {
     status: 'active'
   };
 
-  solicitudes = [
-    { tipoSolicitud: 'Vacaciones', adminAprobo: 'Admin1', usuario: 'Usuario1', fecha: '01/04/2024', justificacion: 'Vacaciones', opciones: '' },
-    { tipoSolicitud: 'Licencia de cumpleaños', adminAprobo: 'Admin2', usuario: 'Usuario2', fecha: '15/05/2024', justificacion: 'Cumpleaños', opciones: '' },
-  ];
 
   usuarios = [
     { usuario: 'Usuario1', turno: 'Turno Vespertino', area: 'Ventas', estado: 'Activo' },
@@ -54,6 +60,7 @@ export class MantenimientoUsuariosComponent {
 
   ngOnInit(): void {
     this.obtenerEmpleados();
+    this.obtenerSolicitud();
   }
 
   onAddEmployee() {
@@ -111,13 +118,26 @@ export class MantenimientoUsuariosComponent {
   }
 
   aprobarSolicitud(solicitud: any) {
-
+    const estadoSol = 'AAR';
+    this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
   }
 
   rechazarSolicitud(solicitud: any) {
-    
+    const estadoSol = 'RAR';
+    this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
+      response => {
+        this.obtenerSolicitud();
+      },
+      error => {
+      }
+    );
   }
-
 
 
   applyFilter(event: Event) {
@@ -144,5 +164,11 @@ export class MantenimientoUsuariosComponent {
 
   navigateToRegister(): void {
     this.router.navigate(['/registrar-empleado']);
+  }
+
+  obtenerSolicitud() {
+    this.empleadoService.obtenerSolicitudes('AAA').subscribe(data => {
+      this.solicitudes = data;
+    });
   }
 }
