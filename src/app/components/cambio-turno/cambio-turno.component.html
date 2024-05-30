@@ -14,7 +14,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Turno Inicial</mat-label>
-            <mat-select [(ngModel)]="turnoIncial" name="shift" required>
+            <mat-select [(ngModel)]="turnoInicial" name="shift" required>
               <mat-option value="Turno Matutino">Turno Matutino</mat-option>
               <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
               <mat-option value="Turno Diurno">Turno Diurno</mat-option>
@@ -41,9 +41,9 @@
       
         <!-- Botón de guardar dentro del formulario -->
         <button mat-raised-button color="primary" type="submit">Guardar</button>
+        <button mat-raised-button color="accent" (click)="limpiarCampos()">Limpiar</button>
+        <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
     </form>
 
-    <!-- Los otros botones están fuera del formulario -->
-    <button mat-raised-button color="accent">Limpiar</button>
-    <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
+
 </div>

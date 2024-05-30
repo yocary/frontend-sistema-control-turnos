@@ -10,9 +10,9 @@ import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 export class CambioTurnoComponent implements OnInit {
 
   usuario!: string;
-  fechaInicial!: Date;
-  turnoIncial!: string
-  fechaNueva!: Date;
+  fechaInicial: | null = null;
+  turnoInicial!: string
+  fechaNueva: | null = null;
   turnoNuevo!: string
   justificacion!: string;
 
@@ -29,7 +29,7 @@ export class CambioTurnoComponent implements OnInit {
       fechaTurnoNuevo: this.fechaNueva,
       idSolicitud: 0,
       justificacion: this.justificacion,
-      turnoInicial: this.turnoIncial,
+      turnoInicial: this.turnoInicial,
       turnoNuevo: this.turnoNuevo,
       usuario: this.usuario
     };
@@ -49,6 +49,14 @@ export class CambioTurnoComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  limpiarCampos() {
+    this.usuario = '';
+    this.fechaInicial = null;
+    this.turnoInicial = '';
+    this.fechaNueva = null;
+    this.turnoNuevo = '';
+    this.justificacion = '';
+  }
 
 
 }
