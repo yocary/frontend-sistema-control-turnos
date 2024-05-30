@@ -37,6 +37,7 @@ export class CambioTurnoComponent implements OnInit {
     this.empleadoService.cambiarTurno(data).subscribe(
       (response) => {
         console.log('Respuesta del servidor:', response);
+        this.router.navigate(['/inicio']);
       },
       (error) => {
         console.error('Error al enviar la solicitud:', error);

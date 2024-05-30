@@ -42,6 +42,7 @@ export class AsignacionTurnosComponent {
     this.empleadoService.guardarAsignacionTurnos(asignacionTurnos).subscribe(
       () => {
         console.log('Asignación de turnos guardada exitosamente');
+        this.router.navigate(['/inicio']);
       },
       error => {
         console.error('Error al guardar la asignación de turnos:', error);

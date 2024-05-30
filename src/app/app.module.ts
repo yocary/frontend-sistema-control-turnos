@@ -26,7 +26,9 @@ import { GestionesEmpleadoComponent } from './components/gestiones-empleado/gest
 import { GestionSolicitudesComponent } from './components/gestion-solicitudes/gestion-solicitudes.component';
 import { CambioTurnoComponent } from './components/cambio-turno/cambio-turno.component';
 import { JwtInterceptor } from './interceptors/JwtInterceptor.intercerptor';
-
+import { SpinnerService } from './services/spinner.service';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';  // Asegúrate de importar tu SpinnerInterceptor
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -40,28 +42,22 @@ const MY_DATE_FORMATS = {
   },
 };
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
-
     LoginComponent,
-
     ScrollSpyDirective,
     LoginComponent,
-
     MantenimientoUsuariosComponent,
-     RegistrarEmpleadoComponent,
-     BarraNavegacionComponent,
-     InicioComponent,
-     AsignacionTurnosComponent,
-     GestionRrhhComponent,
-     GestionesEmpleadoComponent,
-     GestionSolicitudesComponent,
-     CambioTurnoComponent,
-
-  
+    RegistrarEmpleadoComponent,
+    BarraNavegacionComponent,
+    InicioComponent,
+    AsignacionTurnosComponent,
+    GestionRrhhComponent,
+    GestionesEmpleadoComponent,
+    GestionSolicitudesComponent,
+    CambioTurnoComponent,
+    SpinnerComponent,
   ],
   imports: [
     FormsModule,
@@ -73,14 +69,15 @@ const MY_DATE_FORMATS = {
     HttpClientModule,
     NgxSpinnerModule,
     NgbModule,
-
     ServiceWorkerModule.register('sw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   providers: [
+    SpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }  // Añade el SpinnerInterceptor aquí
   ],
   bootstrap: [AppComponent]
 })

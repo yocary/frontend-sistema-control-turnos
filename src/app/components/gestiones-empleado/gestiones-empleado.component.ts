@@ -46,6 +46,7 @@ export class GestionesEmpleadoComponent implements OnInit {
     this.empleadoService.solicitarLicencia(solicitud).subscribe(
       response => {
         console.log('Solicitud enviada con éxito:', response);
+        this.router.navigate(['/inicio']);
         // Aquí puedes manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
       },
       error => {

@@ -55,7 +55,7 @@ export class EmpleadoService {
   }
 
   obtenerSolicitudes(estado: string): Observable<Solicitud[]> {
-    return this.http.get<Solicitud[]>(this.baseUrl + `/solLicenciasEmpleado/obtenerSolLicenciasPA/${estado}`);
+    return this.http.get<Solicitud[]>(this.baseUrl + `/solLicenciasEmpleado/obtenerSolLicencias/${estado}`);
   }
 
   cambiarTurno(data: any): Observable<any> {
