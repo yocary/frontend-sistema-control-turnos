@@ -18,12 +18,12 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/authenticate`, { username, password })
       .pipe(
         tap((response: { jwt: string; }) => {
-          // Guarda el token JWT en el almacenamiento local
           localStorage.setItem('token', response.jwt);
-          // Decodifica el token para extraer los roles y otros detalles
           const decodedToken = this.decodeToken(response.jwt);
           if (decodedToken) {
             localStorage.setItem('roles', JSON.stringify(decodedToken.roles));
+            const expiryTime = decodedToken.exp * 1000; // Convertir a milisegundos
+            localStorage.setItem('tokenExpiry', expiryTime.toString());
           }
         })
       );
@@ -41,11 +41,25 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('roles');
+    localStorage.removeItem('tokenExpiry');
     this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    const expiryTime = localStorage.getItem('tokenExpiry');
+
+    if (!token || !expiryTime) {
+      return false;
+    }
+
+    const now = new Date().getTime();
+    if (now > parseInt(expiryTime, 10)) {
+      this.logout(); // Token ha expirado, se cierra sesión
+      return false;
+    }
+
+    return true;
   }
 
   hasRole(role: string): boolean {
