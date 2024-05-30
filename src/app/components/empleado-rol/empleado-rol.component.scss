@@ -1,0 +1,39 @@
+.empleado-rol-container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .title-bar {
+    margin-bottom: 20px;
+  }
+  
+  .add-section,
+  .delete-section {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    margin: 10px;
+    font-size: 16px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .alert {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ffc107;
+    color: #333;
+    border-radius: 4px;
+  }
+  

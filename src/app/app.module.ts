@@ -28,7 +28,8 @@ import { CambioTurnoComponent } from './components/cambio-turno/cambio-turno.com
 import { JwtInterceptor } from './interceptors/JwtInterceptor.intercerptor';
 import { SpinnerService } from './services/spinner.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { SpinnerInterceptor } from './interceptors/spinner.interceptor';  // Asegúrate de importar tu SpinnerInterceptor
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { EmpleadoRolComponent } from './components/empleado-rol/empleado-rol.component';  // Asegúrate de importar tu SpinnerInterceptor
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -58,6 +59,7 @@ const MY_DATE_FORMATS = {
     GestionSolicitudesComponent,
     CambioTurnoComponent,
     SpinnerComponent,
+    EmpleadoRolComponent,
   ],
   imports: [
     FormsModule,

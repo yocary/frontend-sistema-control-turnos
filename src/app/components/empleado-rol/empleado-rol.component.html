@@ -1,0 +1,48 @@
+<div class="empleado-rol-container">
+    <div class="title-bar">
+      <h2>Gestión de Roles de Empleados</h2>
+    </div>
+
+    <div class="add-section">
+      <h3>Agregar Rol</h3>
+      <form (ngSubmit)="agregarRol()">
+        <mat-form-field>
+          <mat-label>Usuario del Empleado</mat-label>
+          <input matInput type="text" [(ngModel)]="empleadoUsuarioAgregar" name="empleadoUsuarioAgregar" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Rol</mat-label>
+          <mat-select [(ngModel)]="rolIdAgregar" name="rolIdAgregar" required>
+            <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-buttons">
+          <button mat-raised-button color="primary" type="submit">Agregar</button>
+        </div>
+      </form>
+    </div>
+  
+    <div class="delete-section">
+      <h3>Eliminar Rol</h3>
+      <form (ngSubmit)="eliminarRol()">
+        <mat-form-field>
+          <mat-label>Usuario del Empleado</mat-label>
+          <input matInput type="text" [(ngModel)]="empleadoUsuarioEliminar" name="empleadoUsuarioEliminar" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Rol</mat-label>
+          <mat-select [(ngModel)]="rolIdEliminar" name="rolIdEliminar" required>
+            <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-buttons">
+          <button mat-raised-button color="warn" type="submit">Eliminar</button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="rolYaAsignado" class="alert alert-warning">
+      El empleado ya tiene asignado este rol.
+    </div>
+  </div>
+  

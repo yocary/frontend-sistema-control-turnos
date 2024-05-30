@@ -28,7 +28,7 @@ interface SolCambioTurno {
 export class EmpleadoService {
   
 
-  private baseUrl = environment.api; // se consume la ruta que se declaro en el environment
+  private baseUrl = environment.api;
 
   constructor(private http: HttpClient) { }
 
@@ -69,6 +69,16 @@ export class EmpleadoService {
   actualizarEstadoTurno(estadoSol: string, idSolicitud: number): Observable<any> {
     const url = `${this.baseUrl}/solCambioTurno/actualizarEstadoTurno/${estadoSol}/${idSolicitud}`;
     return this.http.post(url, null);
+  }
+
+  guardarEmpleadoRol(usuario: string, rolId: number): Observable<any> {
+    const url = `${this.baseUrl}/empleadoRol/guardar/${usuario}/${rolId}`; 
+    return this.http.post(url, {});
+  }
+
+  eliminarRolEmpleado(usuario: string, rolId: number): Observable<any> {
+    const url = `${this.baseUrl}/empleadoRol/eliminar/${usuario}/${rolId}`;
+    return this.http.delete(url);
   }
 
 }

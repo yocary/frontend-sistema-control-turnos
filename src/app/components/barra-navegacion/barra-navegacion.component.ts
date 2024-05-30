@@ -51,6 +51,10 @@ export class BarraNavegacionComponent implements OnInit {
     this.router.navigate(['/cambio-turno']);
   }
 
+  empleadoRol(): void {
+    this.router.navigate(['/empleado-rol']);
+  }
+
   hasRole(role: string): boolean {
     const roles = this.authService.getRoles();
     return roles.includes(role);
