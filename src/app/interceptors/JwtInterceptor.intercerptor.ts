@@ -3,24 +3,36 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('token');
-        console.log('Token JWT adjuntado:', token);
-        if (token) {
-            const cloned = req.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return next.handle(cloned);
-        } else {
-            return next.handle(req);
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('token');
+    console.log('Token JWT adjuntado:', token);
+    let cloned = req;
+
+    if (token) {
+      cloned = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
         }
+      });
     }
+
+    return next.handle(cloned).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          Swal.fire('Acceso no autorizado', 'No tienes permiso para acceder a este recurso.', 'error');
+        }
+        return throwError(error);
+      })
+    );
+  }
 }
