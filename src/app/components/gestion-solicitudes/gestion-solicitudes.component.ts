@@ -34,14 +34,6 @@ export class GestionSolicitudesComponent implements OnInit {
   showSolicitudesList: boolean = false;
   showSolicitudesTurno: boolean = false;
 
-
-
-  solicitudesTurnos = [
-    { turnoActual: 'Matutino', turnoCambiar: 'Vespertino', usuario: 'Usuario1', fecha: '01/04/2024', justificacion: 'Capacitación', opciones: '' },
-    { turnoActual: 'Diurno', turnoCambiar: 'Matutino', usuario: 'Usuario2', fecha: '15/05/2024', justificacion: 'Salud', opciones: '' },
-  ];
-
-
   displayedColumnsTurnos: string[] = ['turnoActual', 'turnoCambiar', 'usuario', 'fecha', 'justificacion', 'opciones'];
 
   constructor(private router: Router, private empleadoService: EmpleadoService) { }

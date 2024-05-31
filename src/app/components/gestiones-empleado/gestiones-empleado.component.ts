@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class GestionesEmpleadoComponent implements OnInit {
   fechaInicio!: Date;
   fechaFin!: Date;
   motivoSolicitud!: string;
+  form: FormGroup;
 
   gestiones = [
     { descripcion: 'Vacaciones', valor: 'V' },
@@ -24,39 +27,65 @@ export class GestionesEmpleadoComponent implements OnInit {
     { descripcion: 'Otros', valor: 'O' }
   ];
 
-  constructor(private router: Router, private empleadoService: EmpleadoService) { }
+  constructor(
+    private router: Router,
+    private empleadoService: EmpleadoService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      usuario: [''],
+      gestion: [''],
+      fechaInicio: [''],
+      fechaFin: [''],
+      motivoSolicitud: ['']
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  register() {
-
+  register(): void {
     const currentDate = new Date();
 
-    const solicitud = {
-      codLicencia: this.gestion,
-      usuario: this.usuario,
-      estadoSolicitud: 'PA',
-      fechaFin: this.fechaFin,
-      fechaInicio: this.fechaInicio,
-      motivoSolicitud: this.motivoSolicitud,
-      fechaCreacion: currentDate
-    };
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; // ¡Ojo! En JavaScript, los meses van de 0 a 11, por lo que necesitas sumar 1
+    const year = currentDate.getFullYear();
+    
+    // Formatear los componentes de la fecha con ceros a la izquierda si es necesario
+    const formattedDay = day < 10 ? '0' + day : day;
+    const formattedMonth = month < 10 ? '0' + month : month;
+    
+    // Construir la cadena de fecha en el formato deseado
+    const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
+    
+    console.log(formattedDate);
 
+    const solicitud = {
+      codLicencia: this.form.value.gestion,
+      usuario: this.form.value.usuario,
+      estadoSolicitud: 'PA',
+      fechaFin: this.form.value.fechaFin,
+      fechaInicio: this.form.value.fechaInicio,
+      motivoSolicitud: this.form.value.motivoSolicitud
+    };
+  
     this.empleadoService.solicitarLicencia(solicitud).subscribe(
       response => {
         console.log('Solicitud enviada con éxito:', response);
+        Swal.fire('Éxito', 'Gestión creada con éxito', 'success');
         this.router.navigate(['/inicio']);
-        // Aquí puedes manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito
+
       },
       error => {
         console.error('Error al enviar la solicitud:', error);
-        // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error
+        Swal.fire('Error', 'Error al crear la gestión', 'warning');
       }
     );
   }
+  
 
   regresar(): void {
     this.router.navigate(['/inicio']);
   }
+
 }

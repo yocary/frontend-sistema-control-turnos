@@ -3,32 +3,37 @@
     <h2>GESTIONES DEL EMPLEADO</h2>
   </div>
 
-  <form (ngSubmit)="register()">
+  <form (ngSubmit)="register()" [formGroup]="form">
     <mat-form-field>
       <mat-label>Usuario</mat-label>
-      <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
+      <input matInput type="text" formControlName="usuario" required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Gestiones</mat-label>
-      <mat-select [(ngModel)]="gestion" name="gestion" required>
+      <mat-select formControlName="gestion" required>
         <mat-option *ngFor="let gestion of gestiones" [value]="gestion.valor">{{gestion.descripcion}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Fecha Inicio</mat-label>
-      <input matInput [matDatepicker]="fechaInicioPicker" [(ngModel)]="fechaInicio" name="fechaInicio" required>
-      <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
-      <mat-datepicker #fechaInicioPicker></mat-datepicker>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaInicio"
+      />
     </mat-form-field>
+    
     <mat-form-field>
       <mat-label>Fecha Fin</mat-label>
-      <input matInput [matDatepicker]="fechaFinPicker" [(ngModel)]="fechaFin" name="fechaFin" required>
-      <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
-      <mat-datepicker #fechaFinPicker></mat-datepicker>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaFin"
+      />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Motivo Solicitud</mat-label>
-      <textarea matInput id="motivoSolicitud" name="motivoSolicitud" [(ngModel)]="motivoSolicitud" required></textarea>
+      <textarea matInput formControlName="motivoSolicitud" required></textarea>
     </mat-form-field>
     <div class="form-buttons">
       <button mat-raised-button color="primary" type="submit">Guardar</button>

@@ -46,7 +46,7 @@ export class EmpleadoService {
   }
 
   solicitarLicencia(data: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/solLicenciasEmpleado', data);
+    return this.http.post<any>(this.baseUrl + '/solLicenciasEmpleado/guardar', data);
   }
 
   actualizarEstadoLicencia(estadoSol: string, idLicencia: number): Observable<any> {

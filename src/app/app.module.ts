@@ -30,6 +30,7 @@ import { SpinnerService } from './services/spinner.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { EmpleadoRolComponent } from './components/empleado-rol/empleado-rol.component';  // Asegúrate de importar tu SpinnerInterceptor
+import { DatePipe } from '@angular/common';
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -77,6 +78,7 @@ const MY_DATE_FORMATS = {
     })
   ],
   providers: [
+    DatePipe,
     SpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }  // Añade el SpinnerInterceptor aquí
