@@ -18,13 +18,16 @@ export class RegistrarEmpleadoComponent {
   usuario: any;
   contrasenia: any;
   turno: any;
+  correo: any;
 
   constructor(private empleadoService: EmpleadoService, private router: Router) { }
 
   register(): void {
-    this.empleadoService.register(this.dpi, this.nombre, this.area, this.estado, this.usuario, this.contrasenia, this.turno)
+    this.empleadoService.register(this.dpi, this.nombre, this.area, this.estado, this.usuario, this.contrasenia, this.turno, this.correo)
       .subscribe(response => {
         console.log('Empleado registrado correctamente');
+        Swal.fire('Éxito', 'Se creo correctamente', 'success');
+        this.router.navigate(['/inicio']);
       }, error => {
         console.error('Error al registrar empleado:', error);
         Swal.fire('Error', 'Ha ocurrido un error al registrar el empleado', 'error');

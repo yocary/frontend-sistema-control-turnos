@@ -1,6 +1,7 @@
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-empleado-rol',
@@ -17,9 +18,8 @@ export class EmpleadoRolComponent {
     { id: 2, nombre: 'RolAdminArea' },
     { id: 3, nombre: 'RolEmpleado' }
   ];
-  rolYaAsignado: boolean = false;
 
-  constructor(private empleadoService: EmpleadoService) { }
+  constructor(private empleadoService: EmpleadoService, private router: Router) { }
 
   agregarRol() {
     const data = {
@@ -54,5 +54,9 @@ export class EmpleadoRolComponent {
       Swal.fire('Error', 'Error al eliminar asignación de rol', 'error');
 
     });
+  }
+
+  regresar(): void {
+    this.router.navigate(['/inicio']);
   }
 }

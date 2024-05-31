@@ -36,13 +36,13 @@
           </mat-select>
         </mat-form-field>
         <div class="form-buttons">
-          <button mat-raised-button color="warn" type="submit">Eliminar</button>
+          <button mat-raised-button color="accent" type="submit">Eliminar</button>
         </div>
       </form>
+      <div class="form-buttons">
+        <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
+      </div>
     </div>
 
-    <div *ngIf="rolYaAsignado" class="alert alert-warning">
-      El empleado ya tiene asignado este rol.
-    </div>
   </div>
   
