@@ -1,49 +1,53 @@
 <div class="user-maintenance-container">
-    <h2>CAMBIO DE TURNO</h2>
+  <h2>CAMBIO DE TURNO</h2>
 
-    <form (ngSubmit)="register()">
-        <mat-form-field>
-          <mat-label>Usuario</mat-label>
-          <input matInput type="text" id="usuario" name="usuario" [(ngModel)]="usuario" required>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Fecha Inicial</mat-label>
-          <input matInput [matDatepicker]="fechaInicialPicker" [(ngModel)]="fechaInicial" name="fechaInicial" required>
-          <mat-datepicker-toggle matSuffix [for]="fechaInicialPicker"></mat-datepicker-toggle>
-          <mat-datepicker #fechaInicialPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Turno Inicial</mat-label>
-            <mat-select [(ngModel)]="turnoInicial" name="shift" required>
-              <mat-option value="Turno Matutino">Turno Matutino</mat-option>
-              <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
-              <mat-option value="Turno Diurno">Turno Diurno</mat-option>
-            </mat-select>
-          </mat-form-field>
-        <mat-form-field>
-          <mat-label>Fecha Nueva</mat-label>
-          <input matInput [matDatepicker]="fechaNuevaPicker" [(ngModel)]="fechaNueva" name="fechaNueva" required>
-          <mat-datepicker-toggle matSuffix [for]="fechaNuevaPicker"></mat-datepicker-toggle>
-          <mat-datepicker #fechaNuevaPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-        <mat-label>Turno Nuevo</mat-label>
-          <mat-select [(ngModel)]="turnoNuevo" name="shift" required>
-            <mat-option value="Turno Matutino">Turno Matutino</mat-option>
-            <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
-            <mat-option value="Turno Diurno">Turno Diurno</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Justificación</mat-label>
-          <textarea matInput id="justificacion" name="justificacion" [(ngModel)]="justificacion" required></textarea>
-        </mat-form-field>
-      
-        <!-- Botón de guardar dentro del formulario -->
-        <button mat-raised-button color="primary" type="submit">Guardar</button>
-        <button mat-raised-button color="accent" (click)="limpiarCampos()">Limpiar</button>
-        <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
-    </form>
-
-
+  <form (ngSubmit)="register()" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput type="text" formControlName="usuario" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha Inicial</mat-label>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaInicial"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Turno Inicial</mat-label>
+      <mat-select formControlName="turnoInicial" required>
+        <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+        <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+        <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha Nueva</mat-label>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaNueva"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Turno Nuevo</mat-label>
+      <mat-select formControlName="turnoNuevo" required>
+        <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+        <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+        <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Justificación</mat-label>
+      <textarea matInput formControlName="justificacion" required></textarea>
+    </mat-form-field>
+    <div class="form-buttons">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button color="accent" type="button" (click)="limpiarCampos()">Limpiar</button>
+      <button mat-raised-button color="warn" type="button" (click)="onBackToLogin()">Regresar</button>
+    </div>
+  </form>
 </div>

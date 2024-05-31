@@ -63,42 +63,12 @@ export class MantenimientoUsuariosComponent {
     this.obtenerSolicitud();
   }
 
-  onAddEmployee() {
-    if (this.employee.fullName && this.employee.dpi && this.employee.area) {
-      this.resetForm();
-    } else {
-    }
-  }
-
-  onSaveEmployee() {
-    Swal.fire({
-      title: '¿Está seguro de agregar el empleado?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.showSolicitudesList = false;
-        this.showConsultarUsuarioForm = false;
-        Swal.fire(
-          'Guardado',
-          'El empleado ha sido guardado.',
-          'success'
-        );
-      } else {
-      }
-    });
-  }
-
-  onBack() {
+  regresarMenu() {
     this.showSolicitudesList = false;
     this.showConsultarUsuarioForm = false;
   }
 
-  onBackToLogin() {
+  regresar() {
     this.router.navigate(['/']);
   }
 
@@ -121,7 +91,7 @@ export class MantenimientoUsuariosComponent {
     const estadoSol = 'AAR';
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarMenu();
       },
       error => {
       }
@@ -132,7 +102,7 @@ export class MantenimientoUsuariosComponent {
     const estadoSol = 'RAR';
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarMenu();
       },
       error => {
       }
@@ -162,7 +132,7 @@ export class MantenimientoUsuariosComponent {
     );
   }
 
-  navigateToRegister(): void {
+  registrarEmpleado(): void {
     this.router.navigate(['/registrar-empleado']);
   }
 

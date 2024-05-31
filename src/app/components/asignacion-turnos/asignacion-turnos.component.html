@@ -1,35 +1,41 @@
 <div class="asignacion-turnos-container">
-    <h2>ASIGNACIÓN DE TURNOS</h2>
-    <form (ngSubmit)="guardarAsignacion()">
-      <mat-form-field>
-        <mat-label>Fecha Inicio</mat-label>
-        <input matInput [matDatepicker]="fechaInicioPicker" [(ngModel)]="fechaInicio" name="fechaInicio" required>
-        <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
-        <mat-datepicker #fechaInicioPicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Fecha Fin</mat-label>
-        <input matInput [matDatepicker]="fechaFinPicker" [(ngModel)]="fechaFin" name="fechaFin" required>
-        <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
-        <mat-datepicker #fechaFinPicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Empleados</mat-label>
-        <mat-select [(ngModel)]="empleado" name="empleado" required>
-          <mat-option *ngFor="let emp of empleados" [value]="emp">{{emp.usuario}}</mat-option>
-        </mat-select>
-      </mat-form-field>      
-      <mat-form-field>
-        <mat-label>Turno</mat-label>
-        <mat-select [(ngModel)]="turno" name="shift" required>
-          <mat-option value="Turno Matutino">Turno Matutino</mat-option>
-          <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
-          <mat-option value="Turno Diurno">Turno Diurno</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="form-buttons">
-        <button mat-raised-button color="primary" type="submit">Guardar</button>
-        <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
-      </div>
-    </form>
+  <h2>ASIGNACIÓN DE TURNOS</h2>
+  <form (ngSubmit)="guardarAsignacion()" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Fecha Inicio</mat-label>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaInicio"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha Fin</mat-label>
+      <input
+        type="date"
+        matInput
+        formControlName="fechaFin"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Empleados</mat-label>
+      <mat-select formControlName="empleado" required>
+        <mat-option *ngFor="let emp of empleados" [value]="emp">{{emp.usuario}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Turno</mat-label>
+      <mat-select formControlName="turno" required>
+        <mat-option value="Turno Matutino">Turno Matutino</mat-option>
+        <mat-option value="Turno Vespertino">Turno Vespertino</mat-option>
+        <mat-option value="Turno Diurno">Turno Diurno</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="form-buttons">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
+    </div>
+  </form>
 </div>

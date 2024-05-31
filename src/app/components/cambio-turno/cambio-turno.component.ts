@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 
 @Component({
@@ -9,54 +11,56 @@ import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 })
 export class CambioTurnoComponent implements OnInit {
 
-  usuario!: string;
-  fechaInicial: | null = null;
-  turnoInicial!: string
-  fechaNueva: | null = null;
-  turnoNuevo!: string
-  justificacion!: string;
+  form: FormGroup;
 
-  constructor(private router: Router,  private empleadoService: EmpleadoService) { }
-
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private empleadoService: EmpleadoService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      usuario: [''],
+      fechaInicial: [''],
+      turnoInicial: [''],
+      fechaNueva: [''],
+      turnoNuevo: [''],
+      justificacion: ['']
+    });
   }
 
-  register() {
-    const data = {
+  ngOnInit(): void {}
+
+  register(): void {
+    const solicitud = {
       estado: 'PAT',
       fechaSolicitud: new Date(),
-      fechaTurnoInicial: this.fechaInicial,
-      fechaTurnoNuevo: this.fechaNueva,
+      fechaTurnoInicial: this.form.value.fechaInicial,
+      fechaTurnoNuevo: this.form.value.fechaNueva,
       idSolicitud: 0,
-      justificacion: this.justificacion,
-      turnoInicial: this.turnoInicial,
-      turnoNuevo: this.turnoNuevo,
-      usuario: this.usuario
+      justificacion: this.form.value.justificacion,
+      turnoInicial: this.form.value.turnoInicial,
+      turnoNuevo: this.form.value.turnoNuevo,
+      usuario: this.form.value.usuario
     };
-
-    this.empleadoService.cambiarTurno(data).subscribe(
-      (response) => {
+  
+    this.empleadoService.cambiarTurno(solicitud).subscribe(
+      response => {
         console.log('Respuesta del servidor:', response);
+        Swal.fire('Éxito', 'Cambio de turno solicitado con éxito', 'success');
         this.router.navigate(['/inicio']);
       },
-      (error) => {
+      error => {
         console.error('Error al enviar la solicitud:', error);
+        Swal.fire('Error', 'Error al solicitar el cambio de turno', 'error');
       }
     );
   }
 
-  onBackToLogin() {
+  limpiarCampos(): void {
+    this.form.reset();
+  }
+
+  onBackToLogin(): void {
     this.router.navigate(['/']);
   }
-
-  limpiarCampos() {
-    this.usuario = '';
-    this.fechaInicial = null;
-    this.turnoInicial = '';
-    this.fechaNueva = null;
-    this.turnoNuevo = '';
-    this.justificacion = '';
-  }
-
-
 }

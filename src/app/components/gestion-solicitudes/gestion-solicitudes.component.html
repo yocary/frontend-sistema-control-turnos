@@ -4,7 +4,7 @@
       </div>
 
       <div *ngIf="!showSolicitudesList && !showSolicitudesTurno" class="options">
-        <button mat-raised-button color="primary" (click)="showSolicitudesTurno = true">
+        <button mat-raised-button color="primary" (click)="showSolicitudesTurno = true; obtenerSolCambioTurno()">
             Solicitudes Cambio de Turno
         </button>
         <button mat-raised-button color="primary" (click)="showSolicitudesList = true; obtenerSolicitud()">

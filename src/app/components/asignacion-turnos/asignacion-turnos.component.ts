@@ -1,40 +1,47 @@
-import { formatDate } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AsignacionTurnos } from 'src/app/models/asignacion-turnos.model';
+import Swal from 'sweetalert2';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
+import { AsignacionTurnos } from 'src/app/models/asignacion-turnos.model';
 
 @Component({
   selector: 'app-asignacion-turnos',
   templateUrl: './asignacion-turnos.component.html',
   styleUrls: ['./asignacion-turnos.component.scss']
 })
-export class AsignacionTurnosComponent {
-  fechaInicio!: Date;
-  fechaFin!: Date;
-  hora!: string;
-  empleado!: any;
-  turno!: string;
+export class AsignacionTurnosComponent implements OnInit {
+  form: FormGroup;
   empleados: any[] = [];
-  turnos: string[] = ['Turno 1', 'Turno 2', 'Turno 3']; // Ejemplo de lista de empleados, debes reemplazar con tus datos reales
 
-  constructor(private router: Router, private empleadoService: EmpleadoService) {}
+  constructor(
+    private router: Router,
+    private empleadoService: EmpleadoService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      fechaInicio: [''],
+      fechaFin: [''],
+      empleado: [''],
+      turno: ['']
+    });
+  }
 
   ngOnInit(): void {
-    this.obtenerEmpleados()
+    this.obtenerEmpleados();
   }
-  
-  guardarAsignacion() {
-    if (!this.empleado || !this.empleado.usuario) {
-      console.error('Empleado no seleccionado correctamente');
+
+  guardarAsignacion(): void {
+    if (!this.form.value.empleado || !this.form.value.empleado.usuario) {
+      Swal.fire('Seleccione un empleado', '', 'warning');
       return;
     }
 
     const asignacionTurnos: AsignacionTurnos = {
-      fechaInicio: this.fechaInicio,
-      fechaFin: this.fechaFin,
-      usuario: this.empleado.usuario,  // Asegúrate de que `empleado` tiene el campo `usuario`
-      turno: this.turno
+      fechaInicio: this.form.value.fechaInicio,
+      fechaFin: this.form.value.fechaFin,
+      usuario: this.form.value.empleado.usuario,
+      turno: this.form.value.turno
     };
 
     console.log(asignacionTurnos);
@@ -42,19 +49,21 @@ export class AsignacionTurnosComponent {
     this.empleadoService.guardarAsignacionTurnos(asignacionTurnos).subscribe(
       () => {
         console.log('Asignación creada con éxito');
+        Swal.fire('Asignación exitosa', 'Asignación creada con éxito', 'success');
         this.router.navigate(['/inicio']);
       },
       error => {
+        Swal.fire('Error', 'Error al crear asignación', 'error');
         console.error('Error al guardar la asignación de turnos:', error);
       }
     );
   }
 
-  regresar() {
+  regresar(): void {
     this.router.navigate(['/']);
   }
 
-  obtenerEmpleados() {
+  obtenerEmpleados(): void {
     this.empleadoService.obtenerEmpleados().subscribe(
       empleados => {
         this.empleados = empleados;
@@ -63,12 +72,5 @@ export class AsignacionTurnosComponent {
         console.log('Error al obtener los empleados:', error);
       }
     );
-  }
-
-  formatearFecha(fecha: Date): string {
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const año = fecha.getFullYear();
-    return `${dia}-${mes}-${año}`;
   }
 }

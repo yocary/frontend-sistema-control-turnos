@@ -32,8 +32,8 @@ export class EmpleadoService {
 
   constructor(private http: HttpClient) { }
 
-  register(dpi: string, nombre: string, area: string, estado: string, usuario: string, contrasenia: string, turno: number, correo: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/empleado/publico/register`, { dpi, nombre, area, estado, usuario, contrasenia, turno, correo });
+  registrar(dpi: string, nombre: string, area: string, estado: string, usuario: string, contrasenia: string, turno: number, correo: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/empleado/registrar`, { dpi, nombre, area, estado, usuario, contrasenia, turno, correo });
   }
 
 

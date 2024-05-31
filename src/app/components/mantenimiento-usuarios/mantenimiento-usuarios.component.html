@@ -4,16 +4,16 @@
       </div>
 
       <div *ngIf="!showSolicitudesList && !showConsultarUsuarioForm" class="options">
-        <button mat-raised-button color="primary" (click)="navigateToRegister()" >
+        <button mat-raised-button color="primary" (click)="registrarEmpleado()" >
           Agregar Empleado
         </button>
-        <button mat-raised-button color="primary" (click)="showConsultarUsuarioForm = true">
+        <button mat-raised-button color="primary" (click)="showConsultarUsuarioForm = true; obtenerEmpleados()">
             Consultar Usuario
         </button>
-        <button mat-raised-button color="primary" (click)="showSolicitudesList = true">
+        <button mat-raised-button color="primary" (click)="showSolicitudesList = true; obtenerSolicitud()">
           Solicitudes
         </button>
-        <button mat-raised-button color="warn" (click)="onBackToLogin()">Regresar</button>
+        <button mat-raised-button color="warn" (click)="regresar()">Regresar</button>
       </div>
 
   
@@ -56,11 +56,11 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-      <button mat-raised-button color="warn" (click)="onBack()">Regresar</button>
+      <button mat-raised-button color="warn" (click)="regresarMenu()">Regresar</button>
     </div>
 
     <div *ngIf="showConsultarUsuarioForm">
-      <div class="user-maintenance-container" *ngIf="empleados.length > 0">
+      <div class="user-maintenance-container">
         <h2>CONSULTAR USUARIO</h2>
         <div class="search-container">
           <mat-form-field>
@@ -87,7 +87,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedUserColumns"></tr>
           <tr mat-row *matRowDef="let empleado; columns: displayedUserColumns;"></tr>
         </table>
-        <button mat-raised-button color="warn" (click)="onBack()">Regresar</button>
+        <button mat-raised-button color="warn" (click)="regresarMenu()">Regresar</button>
       </div>
       
       </div> 

@@ -56,7 +56,7 @@ export class GestionSolicitudesComponent implements OnInit {
     const estadoSol = 'AAA';
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarGestiones();
       },
       error => {
       }
@@ -67,7 +67,7 @@ export class GestionSolicitudesComponent implements OnInit {
     const estadoSol = 'RAA';
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarGestiones();
       },
       error => {
       }
@@ -90,7 +90,7 @@ export class GestionSolicitudesComponent implements OnInit {
     const estadoSol = 'TA';
     this.empleadoService.actualizarEstadoTurno(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarGestiones();
       },
       error => {
       }
@@ -101,7 +101,7 @@ export class GestionSolicitudesComponent implements OnInit {
     const estadoSol = 'TR';
     this.empleadoService.actualizarEstadoTurno(estadoSol, solicitud).subscribe(
       response => {
-        this.obtenerSolicitud();
+        this.regresarGestiones();
       },
       error => {
       }

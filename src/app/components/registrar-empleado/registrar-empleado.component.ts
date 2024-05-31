@@ -22,8 +22,8 @@ export class RegistrarEmpleadoComponent {
 
   constructor(private empleadoService: EmpleadoService, private router: Router) { }
 
-  register(): void {
-    this.empleadoService.register(this.dpi, this.nombre, this.area, this.estado, this.usuario, this.contrasenia, this.turno, this.correo)
+  registrar(): void {
+    this.empleadoService.registrar(this.dpi, this.nombre, this.area, this.estado, this.usuario, this.contrasenia, this.turno, this.correo)
       .subscribe(response => {
         console.log('Empleado registrado correctamente');
         Swal.fire('Éxito', 'Se creo correctamente', 'success');
