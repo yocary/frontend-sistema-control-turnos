@@ -60,7 +60,7 @@ export class JwtInterceptor implements HttpInterceptor {
           icon: 'error',
           confirmButtonColor: '#146498',
         }).then(() => {
-          this.router.navigate(['/inicio']); 
+ 
         });
         return throwError(error);
       })
