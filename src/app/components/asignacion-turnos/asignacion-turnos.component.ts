@@ -44,11 +44,8 @@ export class AsignacionTurnosComponent implements OnInit {
       turno: this.form.value.turno
     };
 
-    console.log(asignacionTurnos);
-
     this.empleadoService.guardarAsignacionTurnos(asignacionTurnos).subscribe(
       () => {
-        console.log('Asignación creada con éxito');
         Swal.fire('Asignación exitosa', 'Asignación creada con éxito', 'success');
         this.router.navigate(['/inicio']);
       },
@@ -69,7 +66,6 @@ export class AsignacionTurnosComponent implements OnInit {
         this.empleados = empleados;
       },
       error => {
-        console.log('Error al obtener los empleados:', error);
       }
     );
   }

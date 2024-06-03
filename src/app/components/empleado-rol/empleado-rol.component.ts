@@ -28,9 +28,8 @@ export class EmpleadoRolComponent {
     };
   
     this.empleadoService.guardarEmpleadoRol(this.empleadoUsuarioAgregar, this.rolIdAgregar).subscribe(response => {
-      console.log('Rol agregado exitosamente', response);
 
-        Swal.fire('Asignación exitosa', 'La asignación del rol ha sido exitosa', 'success');
+      Swal.fire('Asignación exitosa', 'La asignación del rol ha sido exitosa', 'success');
       
     }, error => {
       console.error('Error al agregar el rol', error);
@@ -46,7 +45,7 @@ export class EmpleadoRolComponent {
     };
 
     this.empleadoService.eliminarRolEmpleado(this.empleadoUsuarioEliminar, this.rolIdEliminar).subscribe(response => {
-      console.log('Rol eliminado exitosamente', response);
+      
       Swal.fire('Eliminación exitosa', 'La eliminación del rol ha sido exitosa', 'success');
 
     }, error => {

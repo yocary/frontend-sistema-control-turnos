@@ -10,12 +10,10 @@ export class SpinnerService {
   spinnerState = this.spinnerSubject.asObservable();
 
   show() {
-    console.log('Spinner show');
     this.spinnerSubject.next(true);
   }
 
   hide() {
-    console.log('Spinner hide');
     this.spinnerSubject.next(false);
   }
 }

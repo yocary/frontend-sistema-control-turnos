@@ -25,7 +25,6 @@ export class RegistrarEmpleadoComponent {
   registrar(): void {
     this.empleadoService.registrar(this.dpi, this.nombre, this.area, this.estado, this.usuario, this.contrasenia, this.turno, this.correo)
       .subscribe(response => {
-        console.log('Empleado registrado correctamente');
         Swal.fire('Éxito', 'Se creo correctamente', 'success');
         this.router.navigate(['/inicio']);
       }, error => {

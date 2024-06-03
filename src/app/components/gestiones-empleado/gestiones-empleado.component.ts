@@ -48,17 +48,13 @@ export class GestionesEmpleadoComponent implements OnInit {
     const currentDate = new Date();
 
     const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1; // ¡Ojo! En JavaScript, los meses van de 0 a 11, por lo que necesitas sumar 1
+    const month = currentDate.getMonth() + 1; 
     const year = currentDate.getFullYear();
     
-    // Formatear los componentes de la fecha con ceros a la izquierda si es necesario
     const formattedDay = day < 10 ? '0' + day : day;
     const formattedMonth = month < 10 ? '0' + month : month;
     
-    // Construir la cadena de fecha en el formato deseado
     const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
-    
-    console.log(formattedDate);
 
     const solicitud = {
       codLicencia: this.form.value.gestion,
@@ -71,7 +67,6 @@ export class GestionesEmpleadoComponent implements OnInit {
   
     this.empleadoService.solicitarLicencia(solicitud).subscribe(
       response => {
-        console.log('Solicitud enviada con éxito:', response);
         Swal.fire('Éxito', 'Gestión creada con éxito', 'success');
         this.router.navigate(['/inicio']);
 
