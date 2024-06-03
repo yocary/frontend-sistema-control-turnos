@@ -11,6 +11,8 @@ import { ScrollSpyDirective } from './directives/scroll-spy/scroll-spy.directive
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { MantenimientoUsuariosComponent } from './components/mantenimiento-usuarios/mantenimiento-usuarios.component';
 import { RegistrarEmpleadoComponent } from './components/registrar-empleado/registrar-empleado.component';
 import { BarraNavegacionComponent } from './components/barra-navegacion/barra-navegacion.component';
@@ -24,7 +26,7 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor.intercerptor';
 import { SpinnerService } from './services/spinner.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
-import { EmpleadoRolComponent } from './components/empleado-rol/empleado-rol.component';  // Asegúrate de importar tu SpinnerInterceptor
+import { EmpleadoRolComponent } from './components/empleado-rol/empleado-rol.component';
 import { DatePipe } from '@angular/common';
 
 const MY_DATE_FORMATS = {
@@ -66,7 +68,11 @@ const MY_DATE_FORMATS = {
     MaterialModule,
     HttpClientModule,
     NgxSpinnerModule,
-    NgbModule
+    NgbModule,
+    ServiceWorkerModule.register('sw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     DatePipe,
