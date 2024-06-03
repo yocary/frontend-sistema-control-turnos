@@ -27,6 +27,14 @@ export class BarraNavegacionComponent implements OnInit {
     this.authService.logout();
   }
 
+  navigateHome(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/inicio']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
   matenimientoUsuarios(): void {
     this.router.navigate(['/mantenimiento-usuarios']);
   }
@@ -59,5 +67,4 @@ export class BarraNavegacionComponent implements OnInit {
     const roles = this.authService.getRoles();
     return roles.includes(role);
   }
-
 }
