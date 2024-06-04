@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.authenticate(this.username, this.password)
+    this.authService.authenticate(this.username.trim(), this.password)
       .subscribe(
         response => {
           localStorage.setItem('token', response.jwt);
