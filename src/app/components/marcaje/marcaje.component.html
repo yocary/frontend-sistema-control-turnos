@@ -10,6 +10,7 @@
         <button mat-raised-button color="primary" [disabled]="marcaje?.horaDescanso2" (click)="marcarDescanso2()">Marcar Descanso</button><br><br>
         <button mat-raised-button color="primary" [disabled]="marcaje?.horaSalida" (click)="marcarSalida()">Marcar Salida</button><br><br><br>
         <button *ngIf="!mostrarInfo" mat-raised-button color="accent" (click)="mostrarInformacion()">Información del Marcaje</button><br><br>
+        <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
     </div>
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Marcaje } from 'src/app/models/marcaje.model';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 import Swal from 'sweetalert2';
@@ -18,7 +19,9 @@ export class MarcajeComponent implements OnInit {
   mostrarInfo = false;
 
 
-  constructor(private fb: FormBuilder, private empleadoService: EmpleadoService) {
+  constructor(private fb: FormBuilder, private empleadoService: EmpleadoService,
+    private router: Router,
+  ) {
     this.marcajeForm = this.fb.group({
 
     });
@@ -101,5 +104,8 @@ export class MarcajeComponent implements OnInit {
     });
   }
 
-  
+  regresar(): void {
+    this.router.navigate(['/inicio']);
+  }
+
 }
