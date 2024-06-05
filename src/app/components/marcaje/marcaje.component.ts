@@ -5,7 +5,6 @@ import { Marcaje } from 'src/app/models/marcaje.model';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-marcaje',
   templateUrl: './marcaje.component.html',
@@ -17,7 +16,6 @@ export class MarcajeComponent implements OnInit {
   horaActual: string;
   mostrarFormulario: boolean = false;
   mostrarInfo = false;
-
 
   constructor(private fb: FormBuilder, private empleadoService: EmpleadoService,
     private router: Router,
@@ -34,13 +32,11 @@ export class MarcajeComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerMarcajeActual();
-
   }
 
   ocultarInformacion(): void {
     this.mostrarInfo = false;
   }
-
 
   mostrarInformacion(): void {
     this.mostrarInfo = true;
@@ -56,8 +52,6 @@ export class MarcajeComponent implements OnInit {
   }
 
   obtenerMarcajeActual(): void {
-
-
     this.empleadoService.obtenerMarcajes().subscribe(
       marcaje => {
         this.marcaje = marcaje;
@@ -78,6 +72,10 @@ export class MarcajeComponent implements OnInit {
   }
   
   marcarDescanso1(): void {
+    if (!this.marcaje?.horaEntrada) {
+      Swal.fire('Advertencia', 'Debe marcar la entrada antes de registrar el descanso.', 'warning');
+      return;
+    }
     this.empleadoService.marcarDescanso1().subscribe(response => {
       this.obtenerMarcajeActual();
       Swal.fire('Marcaje realizado con éxito', '', 'success');
@@ -87,6 +85,10 @@ export class MarcajeComponent implements OnInit {
   }
   
   marcarDescanso2(): void {
+    if (!this.marcaje?.horaEntrada) {
+      Swal.fire('Advertencia', 'Debe marcar la entrada antes de registrar el descanso.', 'warning');
+      return;
+    }
     this.empleadoService.marcarDescanso2().subscribe(response => {
       this.obtenerMarcajeActual();
       Swal.fire('Marcaje realizado con éxito', '', 'success');
@@ -96,6 +98,10 @@ export class MarcajeComponent implements OnInit {
   }
   
   marcarSalida(): void {
+    if (!this.marcaje?.horaEntrada) {
+      Swal.fire('Advertencia', 'Debe marcar la entrada antes de registrar la salida.', 'warning');
+      return;
+    }
     this.empleadoService.marcarSalida().subscribe(response => {
       this.obtenerMarcajeActual();
       Swal.fire('Marcaje realizado con éxito', '', 'success');
@@ -107,5 +113,4 @@ export class MarcajeComponent implements OnInit {
   regresar(): void {
     this.router.navigate(['/inicio']);
   }
-
 }
