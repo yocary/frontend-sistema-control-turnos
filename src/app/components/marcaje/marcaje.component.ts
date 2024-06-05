@@ -41,6 +41,7 @@ export class MarcajeComponent implements OnInit {
 
   mostrarInformacion(): void {
     this.mostrarInfo = true;
+    this.obtenerMarcajeActual();
   }
 
   obtenerHoraActual(): string {
