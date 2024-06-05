@@ -25,6 +25,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { EmpleadoRolComponent } from './components/empleado-rol/empleado-rol.component';
 import { DatePipe } from '@angular/common';
+import { MarcajeComponent } from './components/marcaje/marcaje.component';
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -55,6 +56,7 @@ const MY_DATE_FORMATS = {
     CambioTurnoComponent,
     SpinnerComponent,
     EmpleadoRolComponent,
+    MarcajeComponent,
   ],
   imports: [
     FormsModule,

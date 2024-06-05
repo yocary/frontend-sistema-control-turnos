@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AsignacionTurnos } from '../models/asignacion-turnos.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import { Marcaje } from '../models/marcaje.model';
 
 interface Solicitud {
   idLicencia: number;
@@ -79,6 +80,27 @@ export class EmpleadoService {
   eliminarRolEmpleado(usuario: string, rolId: number): Observable<any> {
     const url = `${this.baseUrl}/empleadoRol/eliminar/${usuario}/${rolId}`;
     return this.http.delete(url);
+  }
+
+  
+  marcarEntrada(): Observable<Marcaje> {
+    return this.http.post<Marcaje>(`${this.baseUrl}/marcaje/entrada`, {});
+  }
+
+  marcarDescanso1(): Observable<Marcaje> {
+    return this.http.post<Marcaje>(`${this.baseUrl}/marcaje/descanso1`, {});
+  }
+
+  marcarDescanso2(): Observable<Marcaje> {
+    return this.http.post<Marcaje>(`${this.baseUrl}/marcaje/descanso2`, {});
+  }
+
+  marcarSalida(): Observable<Marcaje> {
+    return this.http.post<Marcaje>(`${this.baseUrl}/marcaje/salida`, {});
+  }
+
+  obtenerMarcajes(): Observable<Marcaje> {
+    return this.http.get<Marcaje>(`${this.baseUrl}/marcaje/obtenerMarcajes`);
   }
 
 }

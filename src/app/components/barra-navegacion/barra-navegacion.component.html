@@ -9,6 +9,7 @@
     <button mat-button color="accent" class="option-button" (click)="gestionesEmpleado()" *ngIf="hasRole('RolEmpleado')">Gestión del empleado</button>
     <button mat-button color="accent" class="option-button" (click)="cambioTurno()" *ngIf="hasRole('RolEmpleado')">Cambios de turno</button>
     <button mat-button color="accent" class="option-button" (click)="empleadoRol()" *ngIf="hasRole('RolAdminRRHH')">Gestión Roles</button>
+    <button mat-button color="accent" class="option-button" (click)="marcaje()" *ngIf="hasRole('RolAdminArea') || hasRole('RolEmpleado')">Marcaje</button>
   </div>
   <button mat-icon-button *ngIf="shouldShowLogout()" class="logout-button" (click)="logout()">
     <mat-icon>exit_to_app</mat-icon>
