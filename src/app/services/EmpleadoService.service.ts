@@ -60,7 +60,7 @@ export class EmpleadoService {
   }
 
   cambiarTurno(data: any): Observable<any> {
-    return this.http.post(this.baseUrl + '/solCambioTurno', data);
+    return this.http.post(this.baseUrl + '/solCambioTurno/guardarSolCambioTurno', data);
   }
 
   obtenerSolCambioTurno(estado: string): Observable<SolCambioTurno[]> {
