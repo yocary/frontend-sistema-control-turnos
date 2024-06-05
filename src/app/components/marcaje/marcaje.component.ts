@@ -71,8 +71,11 @@ export class MarcajeComponent implements OnInit {
       } else {
         this.esTarde = false;
       }
+    } else {
+      this.esTarde = false;
     }
   }
+  
 
   marcarEntrada(): void {
     this.empleadoService.marcarEntrada().subscribe(response => {
