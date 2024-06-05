@@ -35,6 +35,7 @@ export class MarcajeComponent implements OnInit {
 
   ocultarInformacion(): void {
     this.mostrarInfo = false;
+    this.obtenerMarcajeActual();
   }
 
   mostrarInformacion(): void {
