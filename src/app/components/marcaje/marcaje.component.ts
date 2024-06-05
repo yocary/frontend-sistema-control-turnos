@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Marcaje } from 'src/app/models/marcaje.model';
 import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
@@ -16,18 +16,17 @@ export class MarcajeComponent implements OnInit {
   horaActual: string;
   mostrarFormulario: boolean = false;
   mostrarInfo = false;
+  esTarde: boolean = false;
 
   constructor(private fb: FormBuilder, private empleadoService: EmpleadoService,
     private router: Router,
   ) {
-    this.marcajeForm = this.fb.group({
-
-    });
+    this.marcajeForm = this.fb.group({});
 
     this.horaActual = this.obtenerHoraActual();
     setInterval(() => {
       this.horaActual = this.obtenerHoraActual();
-    }, 1000); // Actualiza cada segundo
+    }, 1000); 
   }
 
   ngOnInit(): void {
@@ -55,11 +54,23 @@ export class MarcajeComponent implements OnInit {
     this.empleadoService.obtenerMarcajes().subscribe(
       marcaje => {
         this.marcaje = marcaje;
+        this.verificarSiEsTarde();
       },
       error => {
         console.error('Error al obtener el marcaje:', error);
       }
     );
+  }
+
+  verificarSiEsTarde(): void {
+    if (this.marcaje && this.marcaje.horaEntrada) {
+      const [horas, minutos] = this.marcaje.horaEntrada.split(':').map(Number);
+      if (horas > 8 || (horas === 8 && minutos > 0)) {
+        this.esTarde = true;
+      } else {
+        this.esTarde = false;
+      }
+    }
   }
 
   marcarEntrada(): void {

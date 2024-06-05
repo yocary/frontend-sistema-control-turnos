@@ -1,7 +1,5 @@
 <div class="marcaje-container">
-
     <div *ngIf="!mostrarInfo">
-
         <h1>Registrar Marcaje</h1>
         <mat-icon>schedule</mat-icon>
         <p class="hora-actual">{{ horaActual }}</p>
@@ -13,12 +11,11 @@
         <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
     </div>
 
-
     <div *ngIf="mostrarInfo" class="marcaje-info mat-card mat-elevation-z4">
         <h1 class="mat-h1">Información del Marcaje</h1>
         <div class="info-item">
             <span class="info-label mat-body-1 info-label-large">Hora de Entrada: </span>
-            <span class="info-value mat-body-1">{{ marcaje?.horaEntrada || '-' }}</span>
+            <span class="info-value mat-body-1">{{ marcaje?.horaEntrada || '-' }} <span *ngIf="esTarde" class="tarde-label">(Marcaje tarde)</span></span>
         </div>
         <div class="info-item">
             <span class="info-label mat-body-1 info-label-large">Hora de Descanso: </span>
