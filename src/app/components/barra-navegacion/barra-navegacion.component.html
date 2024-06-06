@@ -1,17 +1,15 @@
 <mat-toolbar color="primary" class="toolbar-container">
   <div class="title-container">
-    <a routerLink="/inicio" class="title">
-      <img src="./assets/img/logo-barra.png" alt="Logo" class="logo">
-    </a>
+    <img src="./assets/img/logo-barra.png" alt="Logo" class="logo" (click)="navigateHome()">
   </div>
   <div *ngIf="shouldShowOptions()" class="options-container">
     <button mat-button color="accent" class="option-button" (click)="matenimientoUsuarios()" *ngIf="hasRole('RolAdminRRHH')">Mantenimiento de usuarios</button>
     <button mat-button color="accent" class="option-button" (click)="asignacionTurnos()" *ngIf="hasRole('RolAdminArea')">Asignación de turnos</button>
-    <!-- <button mat-button color="accent" class="option-button" (click)="gestionRrhh()" *ngIf="hasRole('RolAdminRRHH')">Gestión de RRHH</button> -->
     <button mat-button color="accent" class="option-button" (click)="gestionSolicitudes()" *ngIf="hasRole('RolAdminArea')">Gestión de solicitudes</button>
     <button mat-button color="accent" class="option-button" (click)="gestionesEmpleado()" *ngIf="hasRole('RolEmpleado')">Gestión del empleado</button>
     <button mat-button color="accent" class="option-button" (click)="cambioTurno()" *ngIf="hasRole('RolEmpleado')">Cambios de turno</button>
     <button mat-button color="accent" class="option-button" (click)="empleadoRol()" *ngIf="hasRole('RolAdminRRHH')">Gestión Roles</button>
+    <button mat-button color="accent" class="option-button" (click)="marcaje()" *ngIf="hasRole('RolAdminArea') || hasRole('RolEmpleado')">Marcaje</button>
   </div>
   <button mat-icon-button *ngIf="shouldShowLogout()" class="logout-button" (click)="logout()">
     <mat-icon>exit_to_app</mat-icon>

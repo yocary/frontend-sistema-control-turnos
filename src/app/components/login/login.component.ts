@@ -22,20 +22,17 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.authenticate(this.username, this.password)
+    this.authService.authenticate(this.username.trim(), this.password)
       .subscribe(
         response => {
-          // Maneja la respuesta exitosa
           localStorage.setItem('token', response.jwt);
           this.router.navigate(['/inicio']);
         },
         error => {
-          // Muestra un mensaje de error utilizando Swal.fire
           Swal.fire({
             icon: 'error',
             title: 'Credenciales incorrectas',
           });
-          console.error('Error during login:', error);
         }
       );
   }

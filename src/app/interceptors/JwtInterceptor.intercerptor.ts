@@ -18,7 +18,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-    console.log('Token JWT adjuntado:', token);
     let cloned = req;
 
     if (token) {
@@ -60,7 +59,7 @@ export class JwtInterceptor implements HttpInterceptor {
           icon: 'error',
           confirmButtonColor: '#146498',
         }).then(() => {
-          this.router.navigate(['/inicio']); 
+ 
         });
         return throwError(error);
       })

@@ -27,6 +27,14 @@ export class BarraNavegacionComponent implements OnInit {
     this.authService.logout();
   }
 
+  navigateHome(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/inicio']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
   matenimientoUsuarios(): void {
     this.router.navigate(['/mantenimiento-usuarios']);
   }
@@ -55,9 +63,12 @@ export class BarraNavegacionComponent implements OnInit {
     this.router.navigate(['/empleado-rol']);
   }
 
+  marcaje(): void {
+    this.router.navigate(['/marcaje']);
+  }
+
   hasRole(role: string): boolean {
     const roles = this.authService.getRoles();
     return roles.includes(role);
   }
-
 }

@@ -16,10 +16,8 @@ export class RequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
-      console.log(err);
 
       if ([401, 403].includes(err.status)) {
-        // Borra el token y redirige al usuario al inicio de sesión solo si es un error 401 o 403.
         this.authService.logout();
         this.router.navigate(["/login"]);
         AlertUtils.showToast(
@@ -28,7 +26,6 @@ export class RequestInterceptor implements HttpInterceptor {
         );
       }
 
-      // Devuelve el error para que se pueda manejar en otros lugares si es necesario.
       return throwError(err)
     }));
   }

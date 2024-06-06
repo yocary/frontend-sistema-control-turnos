@@ -18,7 +18,6 @@ export class SpinnerComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.spinnerState.subscribe((state: boolean) => {
-      console.log('Spinner state:', state);
       this.isLoading = state;
     });
   }

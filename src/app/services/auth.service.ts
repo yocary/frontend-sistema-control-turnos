@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 })
 export class AuthService {
 
-  private baseUrl = environment.api; // Ajusta la URL base según tu backend
+  private baseUrl = environment.api;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,7 +22,7 @@ export class AuthService {
           const decodedToken = this.decodeToken(response.jwt);
           if (decodedToken) {
             localStorage.setItem('roles', JSON.stringify(decodedToken.roles));
-            const expiryTime = decodedToken.exp * 1000; // Convertir a milisegundos
+            const expiryTime = decodedToken.exp * 1000; 
             localStorage.setItem('tokenExpiry', expiryTime.toString());
           }
         })
@@ -55,7 +55,7 @@ export class AuthService {
 
     const now = new Date().getTime();
     if (now > parseInt(expiryTime, 10)) {
-      this.logout(); // Token ha expirado, se cierra sesión
+      this.logout();
       return false;
     }
 

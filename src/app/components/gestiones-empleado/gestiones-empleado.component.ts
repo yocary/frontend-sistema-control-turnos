@@ -51,14 +51,10 @@ export class GestionesEmpleadoComponent implements OnInit {
     const month = currentDate.getMonth() + 1; 
     const year = currentDate.getFullYear();
     
-    
     const formattedDay = day < 10 ? '0' + day : day;
     const formattedMonth = month < 10 ? '0' + month : month;
     
-    
     const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
-    
-    console.log(formattedDate);
 
     const solicitud = {
       codLicencia: this.form.value.gestion,
@@ -69,9 +65,8 @@ export class GestionesEmpleadoComponent implements OnInit {
       motivoSolicitud: this.form.value.motivoSolicitud
     };
   
-    this.empleadoService.solicitarLicencia(solicitud).subscribe(//solicitud es el json que se forma para enviarlo al 
-      response => {                                            // al backend para enviarlo al modelo
-        console.log('Solicitud enviada con éxito:', response);
+    this.empleadoService.solicitarLicencia(solicitud).subscribe(
+      response => {
         Swal.fire('Éxito', 'Gestión creada con éxito', 'success');
         this.router.navigate(['/inicio']);
 

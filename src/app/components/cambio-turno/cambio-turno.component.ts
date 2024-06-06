@@ -45,7 +45,6 @@ export class CambioTurnoComponent implements OnInit {
   
     this.empleadoService.cambiarTurno(solicitud).subscribe(
       response => {
-        console.log('Respuesta del servidor:', response);
         Swal.fire('Éxito', 'Cambio de turno solicitado con éxito', 'success');
         this.router.navigate(['/inicio']);
       },

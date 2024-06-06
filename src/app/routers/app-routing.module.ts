@@ -12,6 +12,7 @@ import { GestionesEmpleadoComponent } from "../components/gestiones-empleado/ges
 import { GestionSolicitudesComponent } from "../components/gestion-solicitudes/gestion-solicitudes.component";
 import { CambioTurnoComponent } from "../components/cambio-turno/cambio-turno.component";
 import { EmpleadoRolComponent } from "../components/empleado-rol/empleado-rol.component";
+import { MarcajeComponent } from "../components/marcaje/marcaje.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'gestion-solicitudes', component: GestionSolicitudesComponent, canActivate: [AuthGuard] },
   { path: 'cambio-turno', component: CambioTurnoComponent, canActivate: [AuthGuard] },
   { path: 'empleado-rol', component: EmpleadoRolComponent, canActivate: [AuthGuard] },
+  { path: 'marcaje', component: MarcajeComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 
 ];

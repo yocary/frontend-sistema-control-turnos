@@ -67,18 +67,5 @@ export class AppComponent implements OnInit {
   forcedNavigate(commands: any[], extras?: NavigationExtras): Promise<boolean> {
     return this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(commands, extras));
   }
-
-  // login() {
-  //   const user = { username: this.username, password: this.password };
-  //   this.authService.login(this.username).subscribe(
-  //     response => {
-  //       // Autenticación exitosa, redirige a la página principal o a otra vista
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error => {
-  //       // Error en la autenticación, muestra un mensaje de error al usuario
-  //       console.log('Error de autenticación:', error);
-  //     }
-  //   );
-  // }
+  
 }

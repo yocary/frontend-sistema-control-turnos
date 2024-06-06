@@ -1,0 +1,38 @@
+<div class="marcaje-container">
+    <div *ngIf="!mostrarInfo">
+        <h1>Registrar Marcaje</h1>
+        <mat-icon>schedule</mat-icon>
+        <p class="hora-actual">{{ horaActual }}</p>
+        <button mat-raised-button color="primary" [disabled]="marcaje?.horaEntrada" (click)="marcarEntrada()">Marcar Entrada</button><br><br>
+        <button mat-raised-button color="primary" [disabled]="marcaje?.horaDescanso1" (click)="marcarDescanso1()">Marcar Descanso</button><br><br>
+        <button mat-raised-button color="primary" [disabled]="marcaje?.horaDescanso2" (click)="marcarDescanso2()">Marcar Descanso</button><br><br>
+        <button mat-raised-button color="primary" [disabled]="marcaje?.horaSalida" (click)="marcarSalida()">Marcar Salida</button><br><br><br>
+        <button *ngIf="!mostrarInfo" mat-raised-button color="accent" (click)="mostrarInformacion()">Información del Marcaje</button><br><br>
+        <button mat-raised-button color="warn" type="button" (click)="regresar()">Regresar</button>
+    </div>
+
+    <div *ngIf="mostrarInfo" class="marcaje-info mat-card mat-elevation-z4">
+        <h1 class="mat-h1">Información del Marcaje</h1>
+        <div class="info-item">
+            <span class="info-label mat-body-1 info-label-large">Hora de Entrada: </span>
+            <span class="info-value mat-body-1">
+                {{ marcaje?.horaEntrada || '-' }}
+                <span *ngIf="marcaje?.horaEntrada && esTarde" class="tarde-label">(Entrada tarde)</span>
+            </span>
+        </div>
+        <div class="info-item">
+            <span class="info-label mat-body-1 info-label-large">Hora de Descanso: </span>
+            <span class="info-value mat-body-1">{{ marcaje?.horaDescanso1 || '-' }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label mat-body-1 info-label-large">Hora de Descanso: </span>
+            <span class="info-value mat-body-1">{{ marcaje?.horaDescanso2 || '-' }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label mat-body-1 info-label-large">Hora de Salida: </span>
+            <span class="info-value mat-body-1">{{ marcaje?.horaSalida || '-' }}</span>
+        </div>
+    </div>
+    <br><br>
+    <button *ngIf="mostrarInfo" mat-raised-button color="warn" (click)="ocultarInformacion()">Regresar</button><br><br>
+</div>
