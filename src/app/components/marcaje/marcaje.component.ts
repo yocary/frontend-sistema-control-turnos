@@ -105,7 +105,7 @@ export class MarcajeComponent implements OnInit {
       return;
     }
     if (!this.marcaje?.horaDescanso1) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el primer descanso antes de registrar el segundo descanso.', 'warning');
       return;
     }
     this.empleadoService.marcarDescanso2().subscribe(response => {
@@ -123,11 +123,11 @@ export class MarcajeComponent implements OnInit {
       return;
     }
     if (!this.marcaje?.horaDescanso1) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el primer descanso antes de registrar la salida.', 'warning');
       return;
     }
     if (!this.marcaje?.horaDescanso2) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el segundo descanso antes de registrar la salida.', 'warning');
       return;
     }
     this.empleadoService.marcarSalida().subscribe(response => {
