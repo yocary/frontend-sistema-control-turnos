@@ -52,7 +52,7 @@ export class GestionSolicitudesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  aprobarSolicitud(solicitud: any) {
+  aprobarSolicitud(solicitud: any) {// se envian los estados para el micro
     const estadoSol = 'AAA';
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
@@ -64,7 +64,7 @@ export class GestionSolicitudesComponent implements OnInit {
   }
 
   rechazarSolicitud(solicitud: any) {
-    const estadoSol = 'RAA';
+    const estadoSol = 'RAA';// 
     this.empleadoService.actualizarEstadoLicencia(estadoSol, solicitud).subscribe(
       response => {
         this.regresarGestiones();
@@ -81,7 +81,7 @@ export class GestionSolicitudesComponent implements OnInit {
   }
 
   obtenerSolCambioTurno() {
-    this.empleadoService.obtenerSolCambioTurno('PAT').subscribe(data => {
+    this.empleadoService.obtenerSolCambioTurno('PAT').subscribe(data => {//se obtienen las solicitudes que tengan ese estado
       this.solicitudesCambioTurno = data;
     });
   }

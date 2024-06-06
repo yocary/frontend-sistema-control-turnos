@@ -44,18 +44,18 @@ export class GestionesEmpleadoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(): void {
+  registrar(): void {
     const currentDate = new Date();
 
     const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1; // ¡Ojo! En JavaScript, los meses van de 0 a 11, por lo que necesitas sumar 1
+    const month = currentDate.getMonth() + 1; 
     const year = currentDate.getFullYear();
     
-    // Formatear los componentes de la fecha con ceros a la izquierda si es necesario
+    
     const formattedDay = day < 10 ? '0' + day : day;
     const formattedMonth = month < 10 ? '0' + month : month;
     
-    // Construir la cadena de fecha en el formato deseado
+    
     const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
     
     console.log(formattedDate);
@@ -69,8 +69,8 @@ export class GestionesEmpleadoComponent implements OnInit {
       motivoSolicitud: this.form.value.motivoSolicitud
     };
   
-    this.empleadoService.solicitarLicencia(solicitud).subscribe(
-      response => {
+    this.empleadoService.solicitarLicencia(solicitud).subscribe(//solicitud es el json que se forma para enviarlo al 
+      response => {                                            // al backend para enviarlo al modelo
         console.log('Solicitud enviada con éxito:', response);
         Swal.fire('Éxito', 'Gestión creada con éxito', 'success');
         this.router.navigate(['/inicio']);
