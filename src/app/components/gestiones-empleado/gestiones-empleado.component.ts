@@ -44,7 +44,7 @@ export class GestionesEmpleadoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrar(): void {
+  register(): void {
     const currentDate = new Date();
 
     const day = currentDate.getDate();
