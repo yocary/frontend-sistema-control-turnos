@@ -95,7 +95,7 @@ export class MarcajeComponent implements OnInit {
       this.obtenerMarcajeActual();
       Swal.fire('Marcaje realizado con éxito', '', 'success');
     }, error => {
-      Swal.fire('Error al marcar descanso 1', 'Hubo un error al intentar marcar el descanso', 'error');
+      Swal.fire('Error al marcar descanso', 'Hubo un error al intentar marcar el descanso', 'error');
     });
   }
   
@@ -105,14 +105,14 @@ export class MarcajeComponent implements OnInit {
       return;
     }
     if (!this.marcaje?.horaDescanso1) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso 1.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
       return;
     }
     this.empleadoService.marcarDescanso2().subscribe(response => {
       this.obtenerMarcajeActual();
       Swal.fire('Marcaje realizado con éxito', '', 'success');
     }, error => {
-      Swal.fire('Error al marcar descanso 2', 'Hubo un error al intentar marcar el descanso', 'error');
+      Swal.fire('Error al marcar descanso', 'Hubo un error al intentar marcar el descanso', 'error');
     });
   }
   
@@ -123,11 +123,11 @@ export class MarcajeComponent implements OnInit {
       return;
     }
     if (!this.marcaje?.horaDescanso1) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso 1.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
       return;
     }
     if (!this.marcaje?.horaDescanso2) {
-      Swal.fire('Advertencia', 'Debe marcar el descanso 2.', 'warning');
+      Swal.fire('Advertencia', 'Debe marcar el descanso.', 'warning');
       return;
     }
     this.empleadoService.marcarSalida().subscribe(response => {
