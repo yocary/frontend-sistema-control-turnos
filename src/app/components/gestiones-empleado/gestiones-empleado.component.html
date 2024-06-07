@@ -5,10 +5,6 @@
 
   <form (ngSubmit)="register()" [formGroup]="form">
     <mat-form-field>
-      <mat-label>Usuario</mat-label>
-      <input matInput type="text" formControlName="usuario" required>
-    </mat-form-field>
-    <mat-form-field>
       <mat-label>Gestiones</mat-label>
       <mat-select formControlName="gestion" required>
         <mat-option *ngFor="let gestion of gestiones" [value]="gestion.valor">{{gestion.descripcion}}</mat-option>

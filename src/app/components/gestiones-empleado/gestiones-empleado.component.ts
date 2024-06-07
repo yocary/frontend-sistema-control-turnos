@@ -11,7 +11,6 @@ import { EmpleadoService } from 'src/app/services/EmpleadoService.service';
 })
 export class GestionesEmpleadoComponent implements OnInit {
 
-  usuario!: string;
   gestion!: string;
   fechaInicio!: Date;
   fechaFin!: Date;
@@ -58,7 +57,6 @@ export class GestionesEmpleadoComponent implements OnInit {
 
     const solicitud = {
       codLicencia: this.form.value.gestion,
-      usuario: this.form.value.usuario,
       estadoSolicitud: 'PA',
       fechaFin: this.form.value.fechaFin,
       fechaInicio: this.form.value.fechaInicio,

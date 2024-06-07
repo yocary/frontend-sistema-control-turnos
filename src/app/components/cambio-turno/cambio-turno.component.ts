@@ -19,7 +19,6 @@ export class CambioTurnoComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      usuario: [''],
       fechaInicial: [''],
       turnoInicial: [''],
       fechaNueva: [''],
@@ -39,8 +38,7 @@ export class CambioTurnoComponent implements OnInit {
       idSolicitud: 0,
       justificacion: this.form.value.justificacion,
       turnoInicial: this.form.value.turnoInicial,
-      turnoNuevo: this.form.value.turnoNuevo,
-      usuario: this.form.value.usuario
+      turnoNuevo: this.form.value.turnoNuevo
     };
   
     this.empleadoService.cambiarTurno(solicitud).subscribe(
